@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Форумы</a></li>
+                    <li><a href="#">Поиск</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Профиль</a></li>
+                    <li><a href="#">Войти</a></li>
+                    <li><a href="#">Регистрация</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="forum-categories">
+                <div class="forum-category">
+                    <h2 class="category-title">Общие вопросы</h2>
+                    <ul class="forum-list">
+                        <li><a href="#" class="forum-link">Объявления</a></li>
+                        <li><a href="#" class="forum-link">Вопросы и ответы</a></li>
+                        <li><a href="#" class="forum-link">Предложения</a></li>
+                    </ul>
+                </div>
+                <div class="forum-category">
+                    <h2 class="category-title">Технические обсуждения</h2>
+                    <ul class="forum-list">
+                        <li><a href="#" class="forum-link">Программирование</a></li>
+                        <li><a href="#" class="forum-link">Веб-разработка</a></li>
+                        <li><a href="#" class="forum-link">Базы данных</a></li>
+                    </ul>
+                </div>
+                 <div class="forum-category">
+                    <h2 class="category-title">Игры</h2>
+                    <ul class="forum-list">
+                        <li><a href="#" class="forum-link">Новости игр</a></li>
+                        <li><a href="#" class="forum-link">Обсуждения</a></li>
+                        <li><a href="#" class="forum-link">Поиск напарников</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Ваш форум. Все права защищены.</p>
+        </div>
+    </footer>
+{% endblock %}
