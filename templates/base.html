@@ -14,19 +14,74 @@
 </head>
 <body>
 <div class="header">
-    <div>
-        <img src="" alt="Logo" style="vertical-align: middle;">
-        <a href="#">Форумы</a>
-        <a href="#">Что нового?</a>
-        <a href="#">Пользователи</a>
-        <a href="#">Wiki</a>
+    <div class="logo-navigation">
+        <a href="/" class="logo-link">
+            <img src="" alt="Logo" class="logo">
+        </a>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/forums">
+                        <i class="fa fa-comments-o"></i>
+                        Форумы
+                    </a>
+                </li>
+                <li>
+                    <a href="/whats-new">
+                        <i class="fa fa-bolt"></i>
+                        Что нового?
+                    </a>
+                </li>
+                <li>
+                    <a href="/users">
+                        <i class="fa fa-users"></i>
+                        Пользователи
+                    </a>
+                </li>
+                <li>
+                    <a href="/wiki">
+                        <i class="fa fa-book"></i>
+                        Wiki
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <div class="auth">
-        <a href="#">Вход</a>
-        <a href="#">Регистрация</a>
-        <img src="" alt="Search">
+    {% if current_user.is_authenticated %}
+    <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+    {% else %}
+    <div class="auth-search">
+        <a href="/login">
+            <i class="fa fa-key"></i>
+            Вход
+        </a>
+        <a href="/register">
+            <i class="fa fa-clipboard"></i>
+            Регистрация
+        </a>
+        <!--        <form action="/search" method="GET">-->
+        <!--            <input type="search" placeholder="Поиск..." name="query">-->
+        <!--            <button type="submit">-->
+        <!--                <i class="fa fa-search"></i>-->
+        <!--            </button>-->
+        <!--        </form>-->
     </div>
+    {% endif %}
 </div>
+<!--<div class="header">-->
+<!--    <div>-->
+<!--        <img src="" alt="Logo" style="vertical-align: middle;">-->
+<!--        <a href="#">Форумы</a>-->
+<!--        <a href="#">Что нового?</a>-->
+<!--        <a href="#">Пользователи</a>-->
+<!--        <a href="#">Wiki</a>-->
+<!--    </div>-->
+<!--    <div class="auth">-->
+<!--        <a href="#">Вход</a>-->
+<!--        <a href="#">Регистрация</a>-->
+<!--        <img src="" alt="Search">-->
+<!--    </div>-->
+<!--</div>-->
 <main role="main" class="container">
     {% block content %}{% endblock %}
 </main>

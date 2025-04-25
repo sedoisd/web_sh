@@ -1,7 +1,14 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Forums</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
 
-{% block content %}
-<main>
 <div class="category-group-container">
   <div class="category-group-header" onclick="toggleCategoryVisibility(this)">
     Игры
@@ -119,12 +126,17 @@
         </li>
     </ul>
 </div>
-</main>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2024 Ваш форум. Все права защищены.</p>
-    </div>
-</footer>
+<script>
+function toggleCategoryVisibility(header) {
+  const categoryList = header.parentNode.querySelector('.category-list');
+  categoryList.classList.toggle('hidden');
 
-{% endblock %}
+  const icon = header.querySelector('i');
+  icon.classList.toggle('fa-chevron-down');
+  icon.classList.toggle('fa-chevron-up');
+}
+</script>
+
+</body>
+</html>
