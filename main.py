@@ -5,6 +5,7 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 from data import db_session
 from data.users import User
 from forms.user import RegisterForm, LoginForm
+from sqlalchemy import or_
 
 app = Flask(__name__)
 
@@ -32,11 +33,13 @@ def index():
     #              'categories': [(0, ('модификации', 0), ('Инфа', 1))]}
     return render_template('index.html')  # , data=data_dict)
 
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect("/")
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -52,6 +55,7 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
     form = RegisterForm()
@@ -61,18 +65,13 @@ def reqister():
                                    form=form,
                                    message="Пароли не совпадают")
         db_sess = db_session.create_session()
-        if db_sess.query(User).filter(User.email == form.login_or_email.data).first():
+        if db_sess.query(User).filter(or_(User.email == form.email.data, User.nickname == form.name.data)).first():
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
             name=form.name.data,
-            email=form.login_or_email.data,
-            surname=form.surname.data,
-            age=form.age.data,
-            position=form.position.data,
-            speciality=form.speciality.data,
-            address=form.address.data
+            email=form.login_or_email.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)

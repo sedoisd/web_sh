@@ -34,9 +34,9 @@
     color: #f44336; /* Цвет "Обязательно" */
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group input[type="password"] {
+
+
+.form-group input[class="form-control"]{
     width: 100%;
     padding: 8px;
     border: 1px solid #444;
@@ -51,9 +51,10 @@
 }
 
 .form-description {
-    font-size: 0.8em;
-    color: #777;
-    margin-top: 5px;
+  font-size: 0.8em;
+  color: #777;
+  margin-top: 5px;
+  margin-bottom: 10px; /*отступ снизу у текста описания*/
 }
 
 .password-group {

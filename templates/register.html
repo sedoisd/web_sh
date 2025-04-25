@@ -20,30 +20,51 @@
             <div class="form-section">
                 <div class="form-group">
                     <label for="username">Имя пользователя: </label>
-                    <input type="text" id="username" name="username" required>
+                    {{ form.name(class="form-control", type="text", id="username") }}
+                    {% for error in form.name.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
                     <p class="form-description">Это имя будет отображаться в Ваших сообщениях. Вы можете использовать
-                        любое
-                        имя,
-                        какое пожелаете, но в рамках правил.</p>
+                        любое имя, какое пожелаете, но в рамках правил.</p>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Электронная почта: </label>
-                    <input type="email" id="email" name="email" required>
+                    {{ form.email(class="form-control", type="email", id="email") }}
+                    {% for error in form.email.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+                    <!--                    <input type="email" id="email" name="email" required>-->
                 </div>
 
                 <div class="form-group password-group">
-                    <label for="password">Пароль: </label>
-                    <div class="password-input">
-                        <input type="password" id="password" name="password" required>
-                    </div>
+                    <label for="password1">Пароль: </label>
+                    {{ form.password(class="form-control", type="password", id="password1") }}
+                    {% for error in form.password.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+                    <!--                                        <div class="password-input">-->
+                    <!--                                            <input type="password" id="password" name="password" required>-->
+                    <!--                                        </div>-->
                     <p class="form-description">Необходимо указать пароль.</p>
                 </div>
                 <div class="form-group password-group">
                     <label for="password2">Повторите пароль: </label>
-                    <div class="password-input">
-                        <input type="password" id="password2" name="password" required>
-                    </div>
+                    {{ form.password_again(class="form-control", type="password", id="password2") }}
+                    {% for error in form.password_again.errors %}
+                    <p class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+                    <!--                    <div class="password-input">-->
+                    <!--                        <input type="password" id="password2" name="password" required>-->
+                    <!--                    </div>-->
                     <p class="form-description">Необходимо указать пароль повторно.</p>
                 </div>
                 <!--            <div class="form-group">-->
@@ -53,7 +74,9 @@
                 <!--                </label>-->
                 <!--            </div>-->
 
-                <button type="submit" class="submit-button">reg</button>
+                <!--                <button type="submit" class="submit-button">reg</button>-->
+                <p>{{ form.submit(type="submit", class="submit-button") }}</p>
+                {{message}}
             </div>
         </div>
     </form>
