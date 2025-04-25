@@ -1,4 +1,61 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/register.css')}}">
+<div class="main-container">
+    <h1 align="center">Регистрация</h1>
+    <form action="" method="post">
+        <div class="registration-container">
+            <!--        <div class="social-login">-->
+            <!--            <p>Быстрая регистрация с помощью:</p>-->
+            <!--            <div class="social-buttons">-->
+            <!--                <a href="#" class="social-button vk">VK</a>-->
+            <!--                <a href="#" class="social-button google">Google</a>-->
+            <!--                <a href="#" class="social-button github">GitHub</a>-->
+            <!--                <a href="#" class="social-button reddit">Reddit</a>-->
+            <!--                <a href="#" class="social-button yandex">Yandex</a>-->
+            <!--            </div>-->
+            <!--        </div>-->
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="username">Имя пользователя: </label>
+                    <input type="text" id="username" name="username" required>
+                    <p class="form-description">Это имя будет отображаться в Ваших сообщениях. Вы можете использовать
+                        любое
+                        имя,
+                        какое пожелаете, но в рамках правил.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Электронная почта: </label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group password-group">
+                    <label for="password">Пароль: </label>
+                    <div class="password-input">
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <p class="form-description">Необходимо указать пароль.</p>
+                </div>
+                <div class="form-group password-group">
+                    <label for="password2">Повторите пароль: </label>
+                    <div class="password-input">
+                        <input type="password" id="password2" name="password" required>
+                    </div>
+                    <p class="form-description">Необходимо указать пароль повторно.</p>
+                </div>
+                <!--            <div class="form-group">-->
+                <!--                <label class="agreement">-->
+                <!--                    <input type="checkbox" name="agreement" required>-->
+                <!--                    Я согласен(на) с условиями и политикой конфиденциальности.-->
+                <!--                </label>-->
+                <!--            </div>-->
+
+                <button type="submit" class="submit-button">reg</button>
+            </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

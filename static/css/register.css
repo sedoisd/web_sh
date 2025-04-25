@@ -1,0 +1,118 @@
+.main-container h1 {
+    margin-bottom: 20px;
+    color: #ddd; /* Цвет заголовка */
+}
+
+.registration-container {
+    background-color: #282A2B;
+    border-radius: 5px;
+    padding: 30px;
+    width: 500px;
+    box-sizing: border-box;
+    margin: 0 auto; /* Центрирование формы */
+    text-align: left; /* Выравнивание содержимого формы по левому краю */
+    color: #fff; /* Цвет текста формы */
+}
+
+
+.form-section {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9em;
+    color: #ddd;
+    margin-bottom: 5px;
+}
+
+.form-group label span {
+    color: #f44336; /* Цвет "Обязательно" */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+    color: #777;
+}
+
+.form-description {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 5px;
+}
+
+.password-group {
+    position: relative; /* Для позиционирования кнопки */
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+}
+
+.password-input input {
+    flex-grow: 1; /* Занимает все доступное место */
+    margin-right: 5px;
+}
+
+.password-toggle {
+    background-color: #444; /* Цвет фона кнопки */
+    color: #fff;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.captcha {
+    /* Стили для reCAPTCHA, если нужно */
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    text-align: center; /* Captcha по центру */
+}
+
+.form-group .agreement {
+    font-size: 0.9em;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.form-group .agreement input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+}
+
+.submit-button:disabled {
+    background-color: #777;
+    cursor: not-allowed;
+}
