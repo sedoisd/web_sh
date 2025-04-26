@@ -61,6 +61,7 @@ def reqister():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
+            print(2)
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
@@ -76,7 +77,9 @@ def reqister():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
+        print(1)
         return redirect('/login')
+    print(3)
     return render_template('register.html', title='Регистрация', form=form)
 
 
