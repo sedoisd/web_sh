@@ -8,7 +8,7 @@
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <div class="form-group">
-            <label for="username_email">Имя пользователя:</label>
+            <label for="username_email">Имя пользователя или email:</label>
             {{ form.login_or_email(class="form-control", type="text", id="username_email") }}
             {% for error in form.login_or_email.errors %}
             <div class="alert alert-danger" role="alert">
