@@ -23,8 +23,8 @@ def load_user(user_id):
 
 
 def main():
-    app.run(port=8080, host='127.0.0.1')
     db_session.global_init("db/forum.db")
+    app.run(port=8080, host='127.0.0.1')
 
 
 @app.route('/')
@@ -46,7 +46,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        user = db_sess.query(User).filter(User.email == form.email.data).first()
+        if '@' in form.login_or_email.data:
+            user = db_sess.query(User).filter(User.email == form.login_or_email.data).first()
+        else:
+            user = db_sess.query(User).filter(User.nickname == form.login_or_email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             return redirect("/")
@@ -61,7 +64,6 @@ def reqister():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
-            print(2)
             return render_template('register.html', title='Регистрация',
                                    form=form,
                                    message="Пароли не совпадают")
@@ -71,15 +73,14 @@ def reqister():
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
-            name=form.name.data,
-            email=form.login_or_email.data
+            nickname=form.name.data,
+            email=form.email.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
-        print(1)
         return redirect('/login')
-    print(3)
+    print(form.errors)
     return render_template('register.html', title='Регистрация', form=form)
 
 

@@ -14,4 +14,4 @@ class Forum(SqlAlchemyBase):
     category_id =  sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("categories.id"), nullable=False)
 
     author = orm.relationship('User')
-    category = orm.relationship('User')
+    category = orm.relationship('Category')

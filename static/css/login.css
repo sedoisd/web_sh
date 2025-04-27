@@ -1,9 +1,9 @@
-.registration-container h1 {
+.login-container h1 {
     margin-bottom: 20px;
     color: #ddd;
 }
 
-.registration-container {
+.login-container {
     background-color: #282A2B;
     border-radius: 5px;
     padding: 30px;
@@ -74,14 +74,14 @@
     font-size: 0.8em;
 }
 
-.form-group .agreement {
+.form-group .remember-me { /* Added */
     font-size: 0.9em;
     color: #ddd;
     display: flex;
     align-items: center;
 }
 
-.form-group .agreement input[type="checkbox"] {
+.form-group .remember-me input[type="checkbox"] { /* Added */
     margin-right: 5px;
 }
 

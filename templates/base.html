@@ -47,26 +47,28 @@
             </ul>
         </nav>
     </div>
-    {% if current_user.is_authenticated %}
-    <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
-    {% else %}
-    <div class="auth-search">
-        <a href="/login">
-            <i class="fa fa-key"></i>
-            Вход
-        </a>
-        <a href="/register">
-            <i class="fa fa-clipboard"></i>
-            Регистрация
-        </a>
-        <!--        <form action="/search" method="GET">-->
-        <!--            <input type="search" placeholder="Поиск..." name="query">-->
-        <!--            <button type="submit">-->
-        <!--                <i class="fa fa-search"></i>-->
-        <!--            </button>-->
-        <!--        </form>-->
+    <div>
+        {% if current_user.is_authenticated %}
+        <a class="navbar-brand" href="/logout">{{ current_user.nickname }}</a>
+        {% else %}
+        <div class="auth-search">
+            <a href="/login">
+                <i class="fa fa-key"></i>
+                Вход
+            </a>
+            <a href="/register">
+                <i class="fa fa-clipboard"></i>
+                Регистрация
+            </a>
+            <!--        <form action="/search" method="GET">-->
+            <!--            <input type="search" placeholder="Поиск..." name="query">-->
+            <!--            <button type="submit">-->
+            <!--                <i class="fa fa-search"></i>-->
+            <!--            </button>-->
+            <!--        </form>-->
+        </div>
+        {% endif %}
     </div>
-    {% endif %}
 </div>
 <!--<div class="header">-->
 <!--    <div>-->
@@ -82,7 +84,7 @@
 <!--        <img src="" alt="Search">-->
 <!--    </div>-->
 <!--</div>-->
-<main role="main" class="container">
+<main role="main" class="container" style="margin-top: 50px">
     {% block content %}{% endblock %}
 </main>
 </body>

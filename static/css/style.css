@@ -44,6 +44,10 @@ body {
   background-color: #181a1b;
   color: #ddd;
   font-family: sans-serif;
+  align-items: center;
+  min-height: 100vh; /* Занимает всю высоту экрана */
+  margin: 0;
+  padding: 0;
 }
 
 .category-group-container {
