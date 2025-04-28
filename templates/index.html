@@ -1,125 +1,152 @@
 {% extends "base.html" %}
 
 {% block content %}
-<main>
-<div class="category-group-container">
-  <div class="category-group-header" onclick="toggleCategoryVisibility(this)">
-    Игры
-    <i class="fa fa-chevron-down"></i> <!-- Icon -->
-  </div>
-    <ul class="category-list">
-        <li class="category-item">
-            <div class="category-info">
-                <h3 class="category-title">Grand Theft Auto: San Andreas <span class="new-badge">Новое</span></h3>
-                <div class="category-tags">
-                    <a href="#">Читы</a>
-                    <a href="#">Модификации</a>
-                    <a href="#">Инфа</a>
-                    <a href="#">Помощь</a>
-                    <a href="#">Другое</a>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+    <div class="category-group">
+        <div class="category-header" onclick="toggleCategory(this)">
+            <h1>Разработка ПО</h1>
+            <span class="arrow rotated">&#x2303;</span>
+        </div>
+        <div class="category-items">
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">C/C++ <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 1.5K <br> Сообщения 22.6K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</span>
                 </div>
             </div>
-            <div class="category-stats">
-              <p class="forum-stats">Темы: 102.7K Сообщения: 689K</p>
-            </div>
-            <div class="category-last-post">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <p class="last-post-info">Декомпиляция скрипт...<br>41 мин. назад - The Spark</p>
-            </div>
-        </li>
 
-        <li class="category-item">
-            <div class="category-info">
-                <h3 class="category-title">Grand Theft Auto V <span class="new-badge">Новое</span></h3>
-                <div class="category-tags">
-                    <a href="#">Читы</a>
-                    <a href="#">Модификации</a>
-                    <a href="#">Инфа</a>
-                    <a href="#">Помощь</a>
-                    <a href="#">Другое</a>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Lua <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 12.2K <br> Сообщения 153.6K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>Ищу функцию для зак... <br> Сегодня в 12:29 • Winstal</span>
                 </div>
             </div>
-             <div class="category-stats">
-              <p class="forum-stats">Темы: 1K Сообщения: 6.4K</p>
-            </div>
-            <div class="category-last-post">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <p class="last-post-info">[ALT:V / ALT_V ] Immnit...<br>59 мин. назад - xtr</p>
-            </div>
-        </li>
 
-        <li class="category-item">
-            <div class="category-info">
-                <h3 class="category-title">Minecraft <span class="new-badge">Новое</span></h3>
-                <div class="category-tags">
-                    <a href="#">Читы</a>
-                    <a href="#">Модификации</a>
-                    <a href="#">Помощь</a>
-                    <a href="#">Другое</a>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">CLEO <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 785 <br> Сообщения 23K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>Вопросы по CLEO-скри... <br> 21 Апр 2025 • FANAT.FA...</span>
                 </div>
             </div>
-            <div class="category-stats">
-              <p class="forum-stats">Темы: 925 Сообщения: 6.7K</p>
-            </div>
-            <div class="category-last-post">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <p class="last-post-info">Expensive кикает в хаб ...<br>Вторник в 01:17 - Shidada</p>
-            </div>
-        </li>
 
-        <li class="category-item">
-            <div class="category-info">
-                <h3 class="category-title">Counter Strike <span class="new-badge">Новое</span></h3>
-                <p class="cs-version">CS 1.6, CSS, CS: GO</p>
-                <div class="category-tags">
-                    <a href="#">Читы</a>
-                    <a href="#">Инфа</a>
-                    <a href="#">Другое</a>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">AutoHotKey <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 1.4K <br> Сообщения 11.1K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>(Другое) [ARZ] Авто взят... <br> Вчера в 10:03 • copypas...</span>
                 </div>
             </div>
-             <div class="category-stats">
-              <p class="forum-stats">Темы: 776 Сообщения: 6.4K</p>
-            </div>
-            <div class="category-last-post">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <p class="last-post-info">CS 1.6 Проблема с чита...<br>Вчера в 17:52 - ментале...</p>
-            </div>
-        </li>
 
-        <li class="category-item">
-            <div class="category-info">
-                <h3 class="category-title">Warface <span class="new-badge">Новое</span></h3>
-                <div class="category-tags">
-                    <a href="#">Помощь</a>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Web-разработка <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 593 <br> Сообщения 3.8K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>Говорят людей начали ... <br> Вчера в 10:10 • copypas...</span>
                 </div>
             </div>
-            <div class="category-stats">
-              <p class="forum-stats">Темы: 199 Сообщения: 2.2K</p>
-            </div>
-            <div class="category-last-post">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <p class="last-post-info">Чит Free Internal Hack (...<br>Вчера в 19:53 - memer_f...</p>
-            </div>
-        </li>
 
-        <li class="category-item">
-            <div class="category-info">
-                <h3 class="category-title">Другие игры <span class="new-badge">Новое</span></h3>
-                <div class="category-tags">
-                    <a href="#">Помощь</a>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Python <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 780 <br> Сообщения 5.5K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>Кодировщик <br> Сегодня в 10:06 • chrom...</span>
                 </div>
             </div>
-           <div class="category-stats">
-              <p class="forum-stats">Темы: 3K Сообщения: 14.6K</p>
+
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Pawn <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 593 <br> Сообщения 3.3K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>(Исходник) Мод под GTA... <br> Вчера в 14:30 • nevercra...</span>
+                </div>
             </div>
-            <div class="category-last-post">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <p class="last-post-info">Другая игра помогите ск...<br>Вчера в 19:50 - klaver13...</p>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Reverse-Engineering <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 27 <br> Сообщения 245</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>(Исходник)(Информация <br> Суббота в 20:38 • nevercra...</span>
+                </div>
             </div>
-        </li>
-    </ul>
-</div>
-</main>
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Софт <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 169 <br> Сообщения 1.9K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>AutoHotClicker (GUI AH...<br> Вчера в 22:52 • 20001q</span>
+                </div>
+            </div>
+
+            <div class="category-item">
+                <i class="category-icon">💬</i>
+                <div>
+                    <h2 class="category-title">Другое <span class="new-tag">Новое</span></h2>
+                    <p class="category-description">Вопросы</p>
+                </div>
+                <div class="category-stats">Темы 1K <br> Сообщения 5.8K</div>
+                <div class="category-last-post">
+                    <img src="" alt="User Avatar">
+                    <span>(Софт) Ищу кряк програ... <br> Вчера в 16:28 • Maecc</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleCategory(header) {
+            const categoryGroup = header.parentNode;
+            const categoryItems = categoryGroup.querySelector('.category-items');
+            const arrow = header.querySelector('.arrow');
+
+            categoryItems.classList.toggle('collapsed');
+            arrow.classList.toggle('rotated');
+        }
+    </script>
 
 <footer>
     <div class="container">
