@@ -17,10 +17,22 @@ body {
   font-family: sans-serif;
 }
 
-/* login.html */
+/* login.css */
 .login-container h1 {color: #c0c9ce}
 .login-container {background: #313742}
-.form-group input[class="form-control"]{background-color: #383d48}
-.submit-button {background-color: #558BBD;
-                color: white}
-.remember-me input[class='checkbox']{color:#8f9db0}
+.login-container .form-group input[class="form-control"]{background-color: #383d48}
+.login-container .submit-button {background-color: #558BBD;
+                                 color: white}
+.login-container .form-group label {color: #ddd}
+/* .label-check {} */
+
+
+/* register.css */
+.registration-container h1 {color: #c0c9ce}
+.registration-container {background: #313742}
+.registration-container .form-group input[class="form-control"] {background-color: #383d48;
+                                                                 color: white}
+.registration-container .submit-button {background-color: #558BBD;
+                                        color: white}
+.registration-container .form-group label {color: #ddd}
+.registration-container .form-description {color: #959fb4}

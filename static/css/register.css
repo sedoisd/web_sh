@@ -1,17 +1,14 @@
 .registration-container h1 {
     margin-bottom: 20px;
-    color: #ddd;
 }
 
 .registration-container {
-    background-color: #282A2B;
     border-radius: 5px;
     padding: 30px;
     width: 500px;
     box-sizing: border-box;
     margin: 0 auto;
     text-align: left;
-    color: #fff;
 }
 
 .form-section {
@@ -25,27 +22,20 @@
 .form-group label {
     display: block;
     font-size: 0.9em;
-    color: #ddd;
     margin-bottom: 5px;
 }
 
 .form-group input[class="form-control"]{
     width: 100%;
     padding: 8px;
-    border: 1px solid #444;
-    background-color: #333;
-    color: #fff;
+    border: 1px solid #444;\
     border-radius: 3px;
     box-sizing: border-box;
 }
 
-.form-group input::placeholder {
-    color: #777;
-}
 
 .form-description {
   font-size: 0.8em;
-  color: #777;
   margin-top: 5px;
   margin-bottom: 10px;
 }
@@ -86,8 +76,6 @@
 }
 
 .submit-button {
-    background-color: #558BBD;
-    color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 3px;
