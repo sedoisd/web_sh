@@ -4,6 +4,11 @@ from flask_login import LoginManager, login_user, login_required, logout_user
 
 from data import db_session
 from data.users import User
+from data.groups import Group
+from data.categories import Category, CategoryParentType
+from data.forums import Forum
+from data.topics import Topic
+
 from forms.user import RegisterForm, LoginForm
 from sqlalchemy import or_
 
@@ -23,15 +28,17 @@ def load_user(user_id):
 
 
 def main():
-    db_session.global_init("db/forum.db")
+    db_session.global_init("db/forum_v2.db")
     app.run(port=8080, host='127.0.0.1')
+
 
 
 @app.route('/')
 def index():
-    # data_dict = {'groups': [('gta 5', 0), ('gta sa', 1), ('war thunder', 2)],
-    #              'categories': [(0, ('модификации', 0), ('Инфа', 1))]}
-    return render_template('index.html')  # , data=data_dict)
+    session = db_session.create_session()
+    groups = session.query(Group).all()
+    categories = session.query(Category).filter(Category.parent_type == CategoryParentType.group).all()
+    return render_template('index.html', groups=groups, categories=categories)  # , data=data_dict)
 
 
 @app.route('/logout')

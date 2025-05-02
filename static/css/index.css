@@ -10,7 +10,6 @@
             align-items: center;
             padding: 10px 15px;
             cursor: pointer;
-            background-color: #3a3b3c;
             border-bottom: 1px solid #424242;
         }
 
@@ -18,7 +17,6 @@
             font-size: 1em;
             margin: 0;
             font-weight: normal;
-            color: #fff;
         }
 
         .category-items {
