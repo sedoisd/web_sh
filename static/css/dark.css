@@ -1,5 +1,6 @@
 /* theme_dark.css */
 
+/* style.css */
 .header {
   background-color: #313742;
   color: #a9b7c3;
@@ -28,14 +29,14 @@ body {
     }
 
 .login-container .form-group input[class="form-control"] {
-background-color: #383d48
+    background-color: #383d48
 }
 .login-container .submit-button {
-background-color: #558BBD;
-                                 color: white
-                                 }
+    background-color: #558BBD;
+    color: white
+}
 .login-container .form-group label {
-color: #ddd
+    color: #ddd
 }
 
 /* .label-check {} */
@@ -71,13 +72,35 @@ color: #ddd
 
 
 /* index.css  */
-.category-header {
+.group-header {
     background-color: #3b424f
 }
 
-.category-header h1 {
+.group-header h1 {
     color: #fff
 }
+
+.group-items {
+    background-color: #313742
+}
+
+.child-object-sil a {
+    color: white
+}
+
+.child-object-sil {
+    color: white
+}
+
+.category-description {
+    font-size: 0.75em;
+    color: #888;
+}
+
+
+
+
+/* category.css */
 
 .category-items {
     background-color: #313742

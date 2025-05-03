@@ -3,37 +3,38 @@
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
 {% for group in groups %}
-<div class="category-group">
-    <div class="category-header" onclick="toggleCategory(this)">
-        <h1>{{group.title}}</h1>
+<div class="group" id="group-{{group.id}}">
+    <div class="group-header" onclick="toggleCategory(this)">
+        <a class="group-sil" href="#group-{{group.id}}">{{group.title}}</a>
         <span class="arrow rotated">&#x2303;</span>
     </div>
-    <div class="category-items">
+    <div class="group-items">
         {% for category in categories %}
         {% if category.parent_id == group.id %}
-            <div class="category-item">
-                <i class="category-icon">💬</i>
-                <div>
-<!--                                    <span class="new-tag">Новое</span>-->
-                    <h2 class="category-title">{{category.title}} </h2>
-                    <div class="category-forums">
-                        <p class="category-description">форумы</p>
-                        <p class="category-description">форумы</p>
-                    </div>
-                </div>
-                <div class="category-stats">
-                    Темы 1.5K <br> Сообщения 22.6K
-                </div>
-                <div class="category-last-post">
-                    <img src="" alt="User Avatar">
-                    <p>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</p>
+        <div class="group-item">
+            <i class="item-icon">💬</i>
+            <div class="item-info">
+                <!--                                    <span class="new-tag">Новое</span>-->
+                <a class="item-title" href="/categories/{{category.id}}/">{{category.title}}</a>
+                <div class="item-child-objects">
+                    <a class="child-object-sil" href="/">форумы</a>
+                    <a class="child-object-sil" href="/">форумы</a>
+                    <a class="child-object-sil" href="/">форумы</a>
+                    <a class="child-object-sil" href="/">форумы</a>
+                    <a class="child-object-sil" href="/">форумы</a>
                 </div>
             </div>
+            <div class="item-stats">
+                Темы 1.5K <br> Сообщения 22.6K
+            </div>
+            <div class="item-last-post">
+                <img src="" alt="User Avatar">
+                <p>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</p>
+            </div>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
-
-    <!--        -->
 </div>
 {% endfor %}
 <script>

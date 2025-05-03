@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/category.css')}}">
+
+<div class="category">
+    <h1 class="category-title">{{ category.title }}</h1>
+    <div class="category-items">
+        {% for forum in forums %}
+        <div class="category-item">
+            <i class="item-icon">💬</i>
+            <div class="item-info">
+                <!--                                    <span class="new-tag">Новое</span>-->
+                <a class="item-title" href="/forums/{{forum.id}}/">{{forum.title}}</a>
+
+            </div>
+            <div class="item-stats">
+                Темы x <br> Сообщения x
+            </div>
+            <div class="item-last-post">
+                <img src="" alt="User Avatar">
+                <p>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

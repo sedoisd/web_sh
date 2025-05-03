@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from data import db_session
+from data.my_enum import ForumParentType
 from data.users import User
 from data.groups import Group
 from data.categories import Category, CategoryParentType
@@ -32,13 +33,27 @@ def main():
     app.run(port=8080, host='127.0.0.1')
 
 
-
 @app.route('/')
 def index():
     session = db_session.create_session()
     groups = session.query(Group).all()
     categories = session.query(Category).filter(Category.parent_type == CategoryParentType.group).all()
     return render_template('index.html', groups=groups, categories=categories)  # , data=data_dict)
+
+
+@app.route('/categories/<int:category_id>/')
+def categories(category_id):
+    session = db_session.create_session()
+    category = session.query(Category).filter(Category.id == category_id).first()
+    forums = session.query(Forum).filter(Forum.parent_type == ForumParentType.category,
+                                         Forum.parent_id == category.id).all()
+    return render_template('category.html', category=category, forums=forums)
+
+@app.route('/forums/<int:forum_id>/')
+def forum(forum_id):
+    session = db_session.create_session()
+    forum = session.query(Forum).filter(Forum.id == forum_id).first()
+    return render_template('forum.html', forum=forum)
 
 
 @app.route('/logout')
