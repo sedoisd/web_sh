@@ -6,15 +6,15 @@
 <div class="forum">
     <h1 class="forum-title">вака</h1>
     <div class="managment-page">
-        <div class="inside-managment-page">
-            <a class="button-down" href="/">Назад</a>
-            <ul>
-                <li><a class="number-page">1</a></li>
-                <li>2</li>
-                <li>...</li>
-                <li>45</li>
-            </ul>
-            <a class="button-up" href="/">Вперед</a></div>
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a class="active" href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">...</a>
+            <a href="#">5</a>
+            <a href="#">&raquo;</a>
+        </div>
     </div>
     <div class="forum-items">
         {% for topic in topics %}
@@ -27,7 +27,7 @@
                 <!--                    <span class="tag">Гайд</span>-->
                 <!--                    <span class="tag">Совет</span>-->
                 <!--                </div>-->
-                <a href="#" class="item-title">{{topic.title}}</a>
+                <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
                 <div class="item-author">{{topic.author_id}}</div>
                 <div class="item-stats">
                     <span>20<img src="" width="15px"></span>

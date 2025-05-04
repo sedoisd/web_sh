@@ -59,6 +59,11 @@ def forum(forum_id):
                                         Topic.parent_id == forum.id)
     return render_template('forum.html', forum=forum, topics=topics)
 
+@app.route('/topics/<int:topic_id>/')
+def topic(topic_id):
+
+    return render_template('topic.html')
+
 
 @app.route('/logout')
 @login_required

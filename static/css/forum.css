@@ -1,72 +1,42 @@
 .forum {
-    width: 90%; /* Или другое значение */
-    margin: 10px auto; /* Отступ сверху и снизу */
+    width: 90%;
+    margin: 10px auto;
     font-family: sans-serif;
     color: #bbb;
-    border-radius: 8px; /* Закругленные углы */
-    overflow: hidden; /* Обрезаем все, что выходит за границы */
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 /* Заголовок форума */
 .forum-title {
     font-size: 2em;
     margin: 0;
-    padding: 20px; /* Отступы внутри заголовка */
+    padding: 20px;
     font-weight: normal;
     color: #fff;
-}
-
-/* Стили для блока управления страницами */
-.inside-managment-page {
-
-}
-
-/* Стили для кнопок "Назад" и "Вперед" */
-.button-down,
-.button-up {
-
-}
-
-
-.button-down:hover,
-.button-up:hover {
-}
-
-.button-up {
-
-}
-
-/* Стили для списка страниц */
-.managment-page ul {
-
-
-}
-
-.managment-page li {
-
 }
 
 
 /* === Стили для элементов форума (тем) === */
 
 .forum-items {
-    padding: 10px; /* Уменьшенный отступ внутри items */
+    padding: 10px;
 }
 
 .forum-item {
     display: flex;
     padding: 15px;
     background-color: #2a2a2a;
-    border-bottom: 1px solid #3e3e3e; /* Более тонкая разделительная линия */
+    border-bottom: 1px solid #3e3e3e;
     align-items: center;
 }
 
 .forum-item:last-child {
-    border-bottom: none; /* Убираем линию у последнего элемента */
+    border-bottom: none;
 }
 
 .item-avatar {
-    width: 40px; /* Уменьшенный размер аватарки */
+    width: 40px;
     margin-right: 15px;
 }
 
@@ -74,23 +44,23 @@
     width: 100%;
     border-radius: 50%;
     object-fit: cover;
-    height: 40px; /* Чтобы аватарки были одного размера */
+    height: 40px;
 }
 
 .item-info {
-    flex: 1; /* Занимает все доступное место */
+    flex: 1;
 }
 
 .item-title {
-    font-size: 1.1em; /* Немного уменьшенный размер заголовка */
+    font-size: 1.1em;
     font-weight: bold;
-    color: #ddd; /* Чуть более светлый заголовок */
+    color: #ddd;
     display: block;
     margin-bottom: 5px;
 }
 
 .item-author {
-    font-size: 0.75em; /* Уменьшенный размер автора */
+    font-size: 0.75em;
     color: #777;
 }
 
@@ -99,7 +69,7 @@
     align-items: center;
     font-size: 0.7em;
     color: #888;
-    white-space: nowrap; /* Предотвращаем перенос текста */
+    white-space: nowrap;
 }
 
 .item-stats span {
@@ -110,4 +80,38 @@
     width: 15px;
     vertical-align: middle;
     margin-right: 3px;
+}
+
+
+/* managment page */
+
+.pagination {
+    display: inline-block;
+    background-color: #313742
+}
+
+.pagination a {
+  color: #959fb4;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #505662;
+}
+
+.pagination a.active {
+  background-color: #3b596c;
+  color: white;
+  border: 1px solid #3b596c;
+}
+
+.pagination a:hover:not(.active) {background-color: #242630;}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
