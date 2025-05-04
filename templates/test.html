@@ -1,204 +1,90 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кнопки пагинации</title>
+    <style>
+        /* Общие стили */
+        body {
+            font-family: sans-serif;
+            background-color: #1e1e1e;
+            color: #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-{% block content %}
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+        .pagination {
+            display: flex;
+            align-items: center;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            padding: 10px;
+        }
 
-<div class="forum-container">
-    <div class="game-title">Grand Theft Auto: San Andreas</div>
-    <div class="categories-container">
-        <div class="category-item">
-            <div class="category-details">
-                <i class="category-icon">💬</i>
-                <div class="category-text">
-                    <a href="#" class="category-title">Читы</a>
-                    <span class="new-tag">Новое</span>
-                    <p class="category-description">Скрипты, плагины, худы, скины, модели и прочее</p>
-                    <div class="category-stats">
-                        <i class="topic-icon"></i> 3.6K
-                        <i class="post-icon"></i> 156K
-                    </div>
-                </div>
-            </div>
-            <div class="last-post-details">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <div class="last-post-text">
-                    <a href="#" class="last-post-title">Lua [ARZ]Ores Render</a>
-                    <p class="last-post-info">Сегодня в 15:55 • JessyP...</p>
-                </div>
-            </div>
-        </div>
+        .pagination a,
+        .pagination span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+            text-decoration: none;
+            min-width: 35px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
 
-        <div class="category-item">
-            <div class="category-details">
-                <i class="category-icon">💬</i>
-                <div class="category-text">
-                    <a href="#" class="category-title">Модификации</a>
-                    <span class="new-tag">Новое</span>
-                    <p class="category-description">Скрипты, плагины, худы, скины, модели и прочее</p>
-                    <div class="category-tags">
-                        <a href="#" class="tag">Фиксы</a>
-                        <a href="#" class="tag">Ассеты</a>
-                        <a href="#" class="tag">Биндеры</a>
-                    </div>
-                    <div class="category-stats">
-                        <i class="topic-icon"></i> 2.9K
-                        <i class="post-icon"></i> 90.7K
-                    </div>
-                </div>
-            </div>
-            <div class="last-post-details">
-                <div class="avatar-placeholder">X</div>
-                <div class="last-post-text">
-                    <a href="#" class="last-post-title">ASI [ARZ] FIX Anti-AFK ...</a>
-                    <p class="last-post-info">Сегодня в 15:42 • xansai</p>
-                </div>
-            </div>
-        </div>
+        .pagination a:hover,
+        .pagination span:hover {
+            background-color: #3e3e3e;
+            color: #fff;
+        }
 
-        <!-- Добавьте больше category-item здесь -->
-        <div class="category-item">
-            <div class="category-details">
-                <i class="category-icon">💬</i>
-                <div class="category-text">
-                    <a href="#" class="category-title">Инфа</a>
-                    <span class="new-tag">Новое</span>
-                    <div class="category-stats">
-                        <i class="topic-icon"></i> 1.1K
-                        <i class="post-icon"></i> 21.1K
-                    </div>
-                </div>
-            </div>
-            <div class="last-post-details">
-                <div class="avatar-placeholder placeholder-green">H</div>
-                <div class="last-post-text">
-                    <a href="#" class="last-post-title">Неактуально [ARZ] Слив ...</a>
-                    <p class="last-post-info">Сегодня в 14:38 • hyrixb...</p>
-                </div>
-            </div>
-        </div>
+        .pagination .current {
+            background-color: #568bb1; /* Более выраженный цвет для текущей страницы */
+            color: #fff;
+        }
 
-         <div class="category-item">
-            <div class="category-details">
-                <i class="category-icon">❓</i>
-                <div class="category-text">
-                    <a href="#" class="category-title">Помощь</a>
-                    <span class="new-tag">Новое</span>
-                    <div class="category-tags">
-                        <a href="#" class="tag">Артив</a>
-                    </div>
-                    <div class="category-stats">
-                        <i class="topic-icon"></i> 94.3K
-                        <i class="post-icon"></i> 401.2K
-                    </div>
-                </div>
-            </div>
-            <div class="last-post-details">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <div class="last-post-text">
-                    <a href="#" class="last-post-title">ClientJoin Hook</a>
-                    <p class="last-post-info">57 мин. назад • maksma...</p>
-                </div>
-            </div>
-        </div>
+        .pagination .dots {
+            cursor: default;
+            color: #777;
+        }
 
-                <div class="category-item">
-            <div class="category-details">
-                <i class="category-icon">💬</i>
-                <div class="category-text">
-                    <a href="#" class="category-title">Другое</a>
-                    <span class="new-tag">Новое</span>
-                    <div class="category-stats">
-                        <i class="topic-icon"></i> 1.1K
-                        <i class="post-icon"></i> 21.1K
-                    </div>
-                </div>
-            </div>
-            <div class="last-post-details">
-                <img src="" alt="User Avatar" class="user-avatar">
-                <div class="last-post-text">
-                    <a href="#" class="last-post-title">SpinBot для samp</a>
-                    <p class="last-post-info">Среда в 21:23 • kruleS</p>
-                </div>
-            </div>
-        </div>
+        .pagination .dots:hover {
+            background-color: transparent;
+            color: #777;
+        }
 
-    </div>
+        /* Стили для кнопки "Вперед" */
+        .pagination .next {
+            background-color: #333;
+            color: #eee;
+        }
+
+        .pagination .next:hover {
+            background-color: #555;
+        }
+
+        .pagination .next::after {
+            content: ' \00BB'; /* Unicode символ для "Вперед" */
+        }
+    </style>
+</head>
+<body>
+
+<div class="pagination">
+    <a href="#">1</a>
+    <a href="#" class="current">2</a>
+    <a href="#">3</a>
+    <span class="dots">...</span>
+    <a href="#">55</a>
+    <a href="#" class="next">Вперед</a>
 </div>
 
-<footer>
-    <div class="container">
-        <p>&copy; 2024 Ваш форум. Все права защищены.</p>
-    </div>
-</footer>
-
-<style>
-    /* Основные стили */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #1e293b; /* Dark background */
-        color: #cbd5e1; /* Light text */
-    }
-
-    .forum-container {
-        max-width: 800px; /* Ограничение ширины для макета */
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #2c3e50;
-        border-radius: 8px;
-    }
-
-    .game-title {
-        font-size: 1.5em;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    /* Стили для контейнера категорий */
-    .categories-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Стили для элементов категорий */
-    .category-item {
-        display: flex; /* Используем Flexbox для выравнивания элементов */
-        justify-content: space-between; /* Размещаем детали категории и последний пост по краям */
-        align-items: center;
-        background-color: #334155;
-        border-radius: 8px;
-        padding: 10px 15px;
-        margin-bottom: 10px;
-    }
-
-    .category-details {
-        display: flex;
-        flex-grow: 1; /* Занимает все доступное пространство */
-        align-items: center;
-    }
-
-    .category-icon {
-        font-size: 2em;
-        color: #64748b; /* Lighter color for the icon */
-        margin-right: 15px;
-    }
-
-    .category-text {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .category-title {
-        font-size: 1.1em;
-        font-weight: bold;
-        color: #cbd5e1;
-        text-decoration: none;
-    }
-
-    .category-title:hover {
-        text-decoration: underline;
-    }
-
-    .new-tag {
-        background-color: #0ea5e9;
-        color: white;
-        padding: 2
+</body>
+</html>

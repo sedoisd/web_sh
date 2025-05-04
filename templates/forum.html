@@ -1,5 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/forum.css')}}">
 
+<div class="forum">
+    <h1 class="forum-title">вака</h1>
+    <div class="managment-page">
+        <div class="inside-managment-page">
+            <a class="button-down" href="/">Назад</a>
+            <ul>
+                <li><a class="number-page">1</a></li>
+                <li>2</li>
+                <li>...</li>
+                <li>45</li>
+            </ul>
+            <a class="button-up" href="/">Вперед</a></div>
+    </div>
+    <div class="forum-items">
+        {% for topic in topics %}
+        <div class="forum-item">
+            <div class="item-avatar">
+                <img src="" alt="User Avatar">
+            </div>
+            <div class="item-info">
+                <!--                <div class="item-tags">-->
+                <!--                    <span class="tag">Гайд</span>-->
+                <!--                    <span class="tag">Совет</span>-->
+                <!--                </div>-->
+                <a href="#" class="item-title">{{topic.title}}</a>
+                <div class="item-author">{{topic.author_id}}</div>
+                <div class="item-stats">
+                    <span>20<img src="" width="15px"></span>
+                    <span>10K<img src="" width="15px"></span>
+                    <span>Орк ответил 29 Окт 2024</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

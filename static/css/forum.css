@@ -1,0 +1,113 @@
+.forum {
+    width: 90%; /* Или другое значение */
+    margin: 10px auto; /* Отступ сверху и снизу */
+    font-family: sans-serif;
+    color: #bbb;
+    border-radius: 8px; /* Закругленные углы */
+    overflow: hidden; /* Обрезаем все, что выходит за границы */
+}
+
+/* Заголовок форума */
+.forum-title {
+    font-size: 2em;
+    margin: 0;
+    padding: 20px; /* Отступы внутри заголовка */
+    font-weight: normal;
+    color: #fff;
+}
+
+/* Стили для блока управления страницами */
+.inside-managment-page {
+
+}
+
+/* Стили для кнопок "Назад" и "Вперед" */
+.button-down,
+.button-up {
+
+}
+
+
+.button-down:hover,
+.button-up:hover {
+}
+
+.button-up {
+
+}
+
+/* Стили для списка страниц */
+.managment-page ul {
+
+
+}
+
+.managment-page li {
+
+}
+
+
+/* === Стили для элементов форума (тем) === */
+
+.forum-items {
+    padding: 10px; /* Уменьшенный отступ внутри items */
+}
+
+.forum-item {
+    display: flex;
+    padding: 15px;
+    background-color: #2a2a2a;
+    border-bottom: 1px solid #3e3e3e; /* Более тонкая разделительная линия */
+    align-items: center;
+}
+
+.forum-item:last-child {
+    border-bottom: none; /* Убираем линию у последнего элемента */
+}
+
+.item-avatar {
+    width: 40px; /* Уменьшенный размер аватарки */
+    margin-right: 15px;
+}
+
+.item-avatar img {
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 40px; /* Чтобы аватарки были одного размера */
+}
+
+.item-info {
+    flex: 1; /* Занимает все доступное место */
+}
+
+.item-title {
+    font-size: 1.1em; /* Немного уменьшенный размер заголовка */
+    font-weight: bold;
+    color: #ddd; /* Чуть более светлый заголовок */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.item-author {
+    font-size: 0.75em; /* Уменьшенный размер автора */
+    color: #777;
+}
+
+.item-stats {
+    display: flex;
+    align-items: center;
+    font-size: 0.7em;
+    color: #888;
+    white-space: nowrap; /* Предотвращаем перенос текста */
+}
+
+.item-stats span {
+    margin-right: 10px;
+}
+
+.item-stats img {
+    width: 15px;
+    vertical-align: middle;
+    margin-right: 3px;
+}

@@ -3,12 +3,13 @@ from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from data import db_session
-from data.my_enum import ForumParentType
+from data.my_enum import ForumParentType, TopicParentType
 from data.users import User
 from data.groups import Group
 from data.categories import Category, CategoryParentType
 from data.forums import Forum
 from data.topics import Topic
+from data.posts import Post
 
 from forms.user import RegisterForm, LoginForm
 from sqlalchemy import or_
@@ -49,11 +50,14 @@ def categories(category_id):
                                          Forum.parent_id == category.id).all()
     return render_template('category.html', category=category, forums=forums)
 
+
 @app.route('/forums/<int:forum_id>/')
 def forum(forum_id):
     session = db_session.create_session()
     forum = session.query(Forum).filter(Forum.id == forum_id).first()
-    return render_template('forum.html', forum=forum)
+    topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
+                                        Topic.parent_id == forum.id)
+    return render_template('forum.html', forum=forum, topics=topics)
 
 
 @app.route('/logout')
