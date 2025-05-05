@@ -31,6 +31,9 @@ def load_user(user_id):
 
 def main():
     db_session.global_init("db/forum_v2.db")
+    # session = db_session.create_session()
+    # post = session.query(Post).filter(Post.id == 1).first()
+    # print(post.author.email)
     app.run(port=8080, host='127.0.0.1')
 
 
@@ -61,8 +64,10 @@ def forum(forum_id):
 
 @app.route('/topics/<int:topic_id>/')
 def topic(topic_id):
-
-    return render_template('topic.html')
+    session = db_session.create_session()
+    topic = session.query(Topic).filter(Topic.id == topic_id).first()
+    posts = session.query(Post).filter(Post.topic_id == topic.id).all()
+    return render_template('topic.html', topic=topic, posts=posts)
 
 
 @app.route('/logout')
