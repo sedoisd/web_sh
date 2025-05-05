@@ -21,7 +21,6 @@
 .forum-item {
     display: flex;
     padding: 15px;
-    background-color: #2a2a2a;
     border-bottom: 1px solid #3e3e3e;
     align-items: center;
 }
