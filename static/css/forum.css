@@ -2,12 +2,10 @@
     width: 90%;
     margin: 10px auto;
     font-family: sans-serif;
-    color: #bbb;
     border-radius: 8px;
     overflow: hidden;
 }
 
-/* Заголовок форума */
 .forum-title {
     font-size: 2em;
     margin: 0;
@@ -15,9 +13,6 @@
     font-weight: normal;
     color: #fff;
 }
-
-
-/* === Стили для элементов форума (тем) === */
 
 .forum-items {
     padding: 10px;
@@ -54,21 +49,18 @@
 .item-title {
     font-size: 1.1em;
     font-weight: bold;
-    color: #ddd;
     display: block;
     margin-bottom: 5px;
 }
 
 .item-author {
     font-size: 0.75em;
-    color: #777;
 }
 
 .item-stats {
     display: flex;
     align-items: center;
     font-size: 0.7em;
-    color: #888;
     white-space: nowrap;
 }
 
@@ -83,35 +75,3 @@
 }
 
 
-/* managment page */
-
-.pagination {
-    display: inline-block;
-    background-color: #313742
-}
-
-.pagination a {
-  color: #959fb4;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  border: 1px solid #505662;
-}
-
-.pagination a.active {
-  background-color: #3b596c;
-  color: white;
-  border: 1px solid #3b596c;
-}
-
-.pagination a:hover:not(.active) {background-color: #242630;}
-
-.pagination a:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.pagination a:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}

@@ -2,7 +2,6 @@
     font-size: 2em;
     margin: 0;
     font-weight: normal;
-    color: #fff;
 }
 
 .category-items {
@@ -15,7 +14,6 @@
     align-items: center;
     padding: 10px 15px;
     border-bottom: 1px solid #424242;
-    color: #bbb;
 }
 
 .category-item:last-child {
@@ -26,22 +24,12 @@
     font-size: 1.2em;
     margin: 0;
     font-weight: normal;
-    color: #fff;
 }
 
 .item-icon {
     width: 20px;
     margin-right: 10px;
     color: #777;
-}
-
-.new-tag {
-    background-color: #3b82f6;
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-size: 0.6em;
-    margin-left: 5px;
 }
 
 .item-child-objects {
@@ -75,7 +63,6 @@ item-last-post {
     display: flex;
     align-items: center;
     font-size: 0.7em;
-    color: #aaa;
 }
 
 .item-last-post img {

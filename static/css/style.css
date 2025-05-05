@@ -45,7 +45,7 @@ body {
   color: #ddd;
   font-family: sans-serif;
   align-items: center;
-  min-height: 100vh; /* Занимает всю высоту экрана */
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -59,4 +59,31 @@ body {
     margin-left: 5px;
 }
 
-/* */
+
+
+/* management page */
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid #505662;
+}
+
+.pagination a.active {
+  background-color: #3b596c;
+  border: 1px solid #3b596c;
+}
+
+.pagination a:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.pagination a:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

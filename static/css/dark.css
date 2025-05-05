@@ -18,6 +18,24 @@ body {
   font-family: sans-serif;
 }
 
+/* management page */
+.pagination {
+    background-color: #313742
+}
+
+.pagination a {
+    color: #959fb4;
+}
+
+.pagination a.active {
+    background-color: #3b596c;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #242630;}
+
+
+
 
 /* login.css */
 .login-container h1 {
@@ -101,7 +119,77 @@ body {
 
 
 /* category.css */
+.category-title {
+    color: #fff;
+}
 
 .category-items {
     background-color: #313742
+}
+
+.category-item {
+    color: #bbb;
+}
+
+.item-title {
+    color: #fff;
+}
+
+.item-icon {
+    color: #777;
+}
+
+.item-stats {
+    color: #aaa;
+}
+
+item-last-post {
+    color: #aaa;
+}
+
+
+/* forums.css */
+.forum {
+    color: #bbb;
+}
+
+.forum-title {
+    color: #fff;
+}
+
+.forum-item {
+    background-color: #2a2a2a;
+}
+
+.item-title {
+    color: #ddd;
+}
+
+.item-author {
+    color: #777;
+}
+
+.item-stats {
+    color: #888;
+}
+
+/* topic.css */
+.posts {
+    background-color: #313742
+}
+
+.post::after {
+    background: #505662;
+}
+
+.post {
+    background-color: #313742;
+}
+
+.post-header {
+    color: #6272a4;
+}
+
+.post-user-info-other {
+    color: #50fa7b;
 }
