@@ -1,6 +1,6 @@
 import datetime
 from flask import Flask, render_template, redirect, request
-from flask_login import LoginManager, login_user, login_required, logout_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from data import db_session
 from data.my_enum import ForumParentType, TopicParentType
@@ -12,6 +12,7 @@ from data.topics import Topic
 from data.posts import Post
 
 from forms.user import RegisterForm, LoginForm
+from forms.topic import TopicReplyForm
 from sqlalchemy import or_
 
 app = Flask(__name__)
@@ -41,10 +42,14 @@ def main():
 def index():
     session = db_session.create_session()
     groups = session.query(Group).all()
-    categories = session.query(Category).filter(Category.parent_type == CategoryParentType.group).all()
-    return render_template('index.html', groups=groups, categories=categories)  # , data=data_dict)
+    categories_by_groups = session.query(Category).filter(Category.parent_type == CategoryParentType.group).all()
+    forums_by_groups = session.query(Forum).filter(Forum.parent_type == ForumParentType.group).all()
+    topics_by_groups = session.query(Topic).filter(Topic.parent_type == TopicParentType.group).all()
+    return render_template('index.html', groups=groups, categories_by_groups=categories_by_groups,
+                           forums_by_groups=forums_by_groups, topics_by_groups=topics_by_groups)
 
 
+# view
 @app.route('/categories/<int:category_id>/')
 def categories(category_id):
     session = db_session.create_session()
@@ -59,8 +64,9 @@ def forum(forum_id):
     session = db_session.create_session()
     forum = session.query(Forum).filter(Forum.id == forum_id).first()
     topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
-                                        Topic.parent_id == forum.id)
+                                         Topic.parent_id == forum.id)
     return render_template('forum.html', forum=forum, topics=topics)
+
 
 @app.route('/topics/<int:topic_id>/')
 def topic(topic_id):
@@ -70,6 +76,25 @@ def topic(topic_id):
     return render_template('topic.html', topic=topic, posts=posts)
 
 
+# function topic
+@app.route('/topics/<int:topic_id>/reply', methods=['GET', 'POST'])
+@login_required
+def reply_in_topic(topic_id):
+    form = TopicReplyForm()
+    session = db_session.create_session()
+    topic = session.query(Topic).filter(Topic.id == topic_id).first()
+    if form.validate_on_submit():
+        post = Post(content=form.content.data, author_id=current_user.id, topic_id=topic_id)
+        session.add(post)
+        session.commit()
+
+        topic = session.query(Topic).filter(Topic.id == topic_id).first()
+        posts = session.query(Post).filter(Post.topic_id == topic.id).all()
+        return render_template('topic.html', topic=topic, posts=posts)
+    return render_template('reply.html', topic=topic, form=form)
+
+
+# authorization
 @app.route('/logout')
 @login_required
 def logout():

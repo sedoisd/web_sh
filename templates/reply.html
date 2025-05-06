@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reply.css') }}">
+
+<div class="container">
+    <div class="reply-form">
+        <h1 class="reply-title">Ответ в теме - {{ topic.title }}</h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.content(class="form-control", placeholder="Введите ваш ответ...") }}
+                {% for error in form.content.errors %}
+                <p class="alert alert-danger" role="alert">
+                    {{ error }}
+                </p>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="reply-button">Отправить ответ</button>
+            <a href="/topics/{{ topic.id }}" class="cancel-button">Отменить</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textareas = document.querySelectorAll('.form-control');
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+            textarea.dispatchEvent(new Event('input'));
+        });
+    });
+</script>
+{% endblock %}

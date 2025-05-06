@@ -2,6 +2,7 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
+
 {% for group in groups %}
 <div class="group" id="group-{{group.id}}">
     <div class="group-header" onclick="toggleCategory(this)">
@@ -9,10 +10,10 @@
         <span class="arrow rotated">&#x2303;</span>
     </div>
     <div class="group-items">
-        {% for category in categories %}
+        {% for category in categories_by_groups %}
         {% if category.parent_id == group.id %}
         <div class="group-item">
-            <i class="item-icon">💬</i>
+            <i class="item-icon"><img class="icon-object-image" src="static/image/icon_object/category.webp"></i>
             <div class="item-info">
                 <!--                                    <span class="new-tag">Новое</span>-->
                 <a class="item-title" href="/categories/{{category.id}}/">{{category.title}}</a>
@@ -34,11 +35,39 @@
         </div>
         {% endif %}
         {% endfor %}
-        {% for forum in forums %}
+        {% for forum in forums_by_groups %}
+        {% if forum.parent_id == group.id %}
+        <div class="group-item">
+            <i class="item-icon"><img class="icon-object-image" src="static/image/icon_object/forum.webp"></i>
+            <div class="item-info">
+                <!--                                    <span class="new-tag">Новое</span>-->
+                <a class="item-title" href="/forums/{{forum.id}}/">{{forum.title}}</a>
 
+            </div>
+            <div class="item-stats">
+                Темы x <br> Сообщения x
+            </div>
+            <div class="item-last-post">
+                <img src="" alt="User Avatar">
+                <p>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</p>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
-        {% for topic in topics %}
-
+        {% for topic in topics_by_groups %}
+        {% if topic.parent_id == group.id %}
+        <div class="group-item">
+            <i><img class="icon-object-image" src="static/image/icon_object/link.webp"></i>
+            <div class="item-info">
+                <!--                <div class="item-tags">-->
+                <!--                    <span class="tag">Гайд</span>-->
+                <!--                    <span class="tag">Совет</span>-->
+                <!--                </div>-->
+                <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
+                <div class="item-author">{{topic.author_id}}</div>
+            </div>
+        </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>

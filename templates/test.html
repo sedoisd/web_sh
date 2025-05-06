@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форум</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Ответ в теме</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -15,281 +14,110 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Ensures the body takes up at least the full height of the viewport */
+            min-height: 100vh;
         }
 
         .container {
             width: 80%;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 20px auto;
             padding: 20px;
         }
 
-        .topic {
+        .reply-form {
             background-color: #44475a; /* Dracula comment */
             border-radius: 8px;
-            overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .topic-header {
             padding: 20px;
-            background-color: #343746; /* Dracula background brighter */
         }
 
-        .topic-header h1 {
-            margin: 0;
-            font-size: 1.8em;
+        .reply-title {
             color: #bd93f9; /* Dracula variable */
-        }
-
-        .topic-meta {
-            font-size: 0.8em;
-            color: #6272a4; /* Dracula comment */
-            margin-top: 5px;
-        }
-
-        .topic-meta span {
-            margin-right: 10px;
-        }
-
-        .topic-breadcrumbs {
-            font-size: 0.9em;
-            color: #6272a4; /* Dracula comment */
-            margin-top: 10px;
-        }
-
-        .topic-pagination {
-            padding: 10px 20px;
-            background-color: #343746;
-            text-align: left;
-        }
-
-        .topic-pagination a {
-            color: #f8f8f2; /* Dracula foreground */
-            text-decoration: none;
-            padding: 5px 10px;
-            border: 1px solid #6272a4; /* Dracula comment */
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-        .topic-pagination a:hover {
-            background-color: #6272a4;
-            color: #282a36;
-        }
-
-        .topic-pagination a.current {
-            background-color: #6272a4;
-            color: #282a36;
-        }
-
-        .post {
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #6272a4;
+            padding-bottom: 10px;
         }
 
-        .post:last-child {
-            border-bottom: none;
+        .form-group {
+            margin-bottom: 20px;
         }
 
-        .post-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            color: #6272a4;
-            font-size: 0.8em;
-        }
-
-        .post-number {
-            color: #f1fa8c; /* Dracula string */
-            text-decoration: none;
-        }
-
-        .post-content {
-            display: flex;
-        }
-
-        .post-author {
-            width: 20%;
-            text-align: center;
-            padding-right: 20px;
-            border-right: 1px solid #6272a4;
-        }
-
-        .post-author img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .post-author span {
+        .form-group label {
             display: block;
-            font-weight: bold;
-            color: #50fa7b; /* Dracula green */
+            color: #f8f8f2; /* Dracula foreground */
+            margin-bottom: 5px;
         }
 
-        .post-author p {
-            margin: 5px 0;
-            font-size: 0.9em;
-            color: #6272a4;
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #6272a4;
+            border-radius: 4px;
+            background-color: #343746;
+            color: #f8f8f2;
+            font-family: inherit;
+            font-size: 1em;
         }
 
-        .post-stats {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #6272a4;
+        .form-control:focus {
+            outline: none;
+            border-color: #8be9fd; /* Dracula cyan */
+            box-shadow: 0 0 5px rgba(139, 233, 253, 0.5);
         }
 
-        .post-stats i {
-            margin-right: 5px;
-        }
-
-        .post-text {
-            width: 80%;
-            padding-left: 20px;
-            line-height: 1.6;
-        }
-
-        .weapon-list {
+        .errors {
             list-style: none;
             padding: 0;
-            margin-top: 10px;
+            margin-top: 5px;
+            color: #ff79c6; /* Dracula pink */
         }
 
-        .weapon-list li {
-            padding: 5px 0;
-            border-bottom: 1px solid #6272a4;
+        .reply-button, .cancel-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            display: inline-block; /* Для правильного отображения отступов */
         }
 
-        .weapon-list li:last-child {
-            border-bottom: none;
+        .reply-button {
+            background-color: #50fa7b; /* Dracula green */
+            color: #282a36;
         }
 
-        .post-footer {
-            margin-top: 10px;
-            font-size: 0.8em;
-            color: #6272a4;
+        .reply-button:hover {
+            background-color: #8be9fd; /* Dracula cyan */
         }
 
-        .post-footer i {
-            margin-right: 5px;
+        .cancel-button {
+            background-color: #ff79c6; /* Dracula pink */
+            color: #282a36;
+            margin-left: 10px;
+        }
+
+        .cancel-button:hover {
+            background-color: #bd93f9; /* Dracula variable */
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="topic">
-            <div class="topic-header">
-                <h1>SA:MP Добавление звуков в уге на кастом ганы</h1>
-                <div class="topic-meta">
-                    <span><i class="far fa-calendar"></i> 27 Ноя 2024</span>
-                    <span>&</span>
-                    <span>Performance</span>
-                    <span><i class="fas fa-tags"></i> Arizona, Samp, UGS, Звуки, Кастом ганы</span>
-                </div>
-                <div class="topic-breadcrumbs">
-                    <span><i class="fas fa-gamepad"></i> Grand Theft Auto: San Andreas</span> > <span><i class="fas fa-info-circle"></i> Инфа</span>
-                </div>
+<div class="container">
+    <div class="reply-form">
+        <h1 class="reply-title">Ответ в теме - {{topic.title}}</h1>
+        <form>
+            <div class="form-group">
+                <textarea class="form-control" placeholder="Введите ваш ответ..."></textarea>
             </div>
 
-            <div class="topic-pagination">
-                <a href="#" class="current">1</a>
-                <a href="#">2</a>
-                <a href="#"><i class="fas fa-angle-right"></i> Вперёд ›</a>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    <span>27 Ноя 2024</span>
-                    <a href="#" class="post-number">#1</a>
-                </div>
-
-                <div class="post-content">
-                    <div class="post-author">
-                        <img src="" alt="Аватар">
-                        <span>Performance</span>
-                        <p>Новичок</p>
-                        <p>Автор темы</p>
-
-                        <div class="post-stats">
-                            <i class="fas fa-comment"></i> 10
-                            <i class="fas fa-thumbs-up"></i> 4
-                        </div>
-                    </div>
-
-                    <div class="post-text">
-                        <p>короче, кто хочет сделать звуки кастом ганов без звуков сампа есть гайд как их добавить в ugs, заходим в ungerl.ini и вписываем айди оружия на которые нам нужны
-                            звуки, например золотые калаши: 78=ak47_gold TEC9.mp3 после чего сохраняем и заходим в папку resource и дальше ugenrl и добавляем звук который нам нужен
-                            рандомный как на узи и переименовываем его на ak47_gold TEC9.mp3, заходим в игру и кайфуем.</p>
-
-                        <p>вот вам айди оружия всех кастом ганов:</p>
-
-                        <ul class="weapon-list">
-                            <li>71 deagle_steel DESERT_EAGLE</li>
-                            <li>72 deagle_gold DESERT_EAGLE</li>
-                            <li>73 glock_gradient PISTOL</li>
-                            <li>74 deagle_flame DESERT_EAGLE</li>
-                            <li>75 python_royal DESERT_EAGLE</li>
-                            <li>76 python_silver DESERT_EAGLE</li>
-                            <li>77 ak47_roses TEC9</li>
-                            <li>78 ak47_gold TEC9</li>
-                            <li>79 m249_graffiti M4</li>
-                            <li>80 saiga_gold SPAS12</li>
-                            <li>81 ppsh_standart MP5</li>
-                            <li>82 m249 standart M4</li>
-                            <li>83 skorp_standart TEC9</li>
-                            <li>84 aks74_camouflage1 MP5</li>
-                            <li>85 ak47_camouflage1 AK47</li>
-                            <li>86 rebecca_shotgun SPAS12</li>
-                            <li>87 obj54_doomgun</li>
-                        </ul>
-
-                        <p>короче кто хочет добавить это в gametweaker смотрите: берет так же открываете gametweaker.ini вписываете туда 78=ak47_gold TEC9.mp3, после чего идете в resource и
-                            туда добавлете звук как я описал выше</p>
-
-                        <div class="post-footer">
-                            <span><i class="fas fa-users"></i> ghjfh, kinamaster22, фывфыв1337 и ещё 1 человек</span>
-                            <span>Последнее редактирование: 28 Ноя 2024</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    <span>6 Дек 2024</span>
-                    <a href="#" class="post-number">#2</a>
-                </div>
-
-                <div class="post-content">
-                    <div class="post-author">
-                        <img src="" alt="Аватар">
-                        <span>Performance</span>
-                        <p>Новичок</p>
-                        <p>Автор темы</p>
-
-                        <div class="post-stats">
-                            <i class="fas fa-comment"></i> 10
-                            <i class="fas fa-thumbs-up"></i> 4
-                        </div>
-                    </div>
-
-                    <div class="post-text">
-                        <p>если что то не понятно пишите в эту тему отвечаю часто</p>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+            <button type="submit" class="reply-button">Отправить ответ</button>
+            <a href="#" class="cancel-button">Отменить</a>
+        </form>
     </div>
+</div>
 
 </body>
 </html>

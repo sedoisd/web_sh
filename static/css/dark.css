@@ -47,7 +47,8 @@ body {
     }
 
 .login-container .form-group input[class="form-control"] {
-    background-color: #383d48
+    background-color: #383d48;
+    color: #c0c9ce
 }
 .login-container .submit-button {
     background-color: #558BBD;
@@ -157,13 +158,9 @@ item-last-post {
     color: #fff;
 }
 
-.forum-items {
+.forum-item {
     background-color: #313742
 }
-
-/*.forum-item {
-    background-color: #2a2a2a;
-}*/
 
 .item-title {
     color: #ddd;
@@ -178,22 +175,41 @@ item-last-post {
 }
 
 /* topic.css */
+.object-reply .reply {
+    background-color: #558BBD;
+}
+
+.object-reply .reply:hover {
+    background-color: #3b596c;
+}
+
 .posts {
     background-color: #313742
-}
-
-.post::after {
-    background: #505662;
-}
-
-.post {
-    background-color: #313742;
 }
 
 .post-header {
     color: #6272a4;
 }
 
+.post {
+    background-color: #313742;
+}
+
 .post-user-info-other {
     color: #50fa7b;
 }
+
+.post-number {
+    color: #959fb4
+}
+
+.post-number:hover {
+    color: #aec7ba
+}
+
+
+
+.post::after {
+    background: #505662;
+}
+
