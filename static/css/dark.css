@@ -174,6 +174,7 @@ item-last-post {
     color: #888;
 }
 
+
 /* topic.css */
 .object-reply .reply {
     background-color: #558BBD;
@@ -207,9 +208,56 @@ item-last-post {
     color: #aec7ba
 }
 
-
-
 .post::after {
     background: #505662;
 }
 
+
+/* reply.css  */
+.reply-form {
+    background-color: #313742;
+}
+
+.reply-title {
+    color: #eceff4;
+}
+
+.form-control {
+    background-color: #383d48;
+    color: #eceff4;
+    color: #b7c9d8;
+}
+
+.form-control::placeholder {
+    color: #6a717e;
+}
+
+
+.form-control:focus {
+    color: #b7c9d8;
+    border-color: #313742;
+    background-color: #313742;
+}
+
+.alert-danger {
+    background-color: #bf616a;
+    color: #eceff4;
+}
+
+.reply-button {
+    background-color: #558BBD;
+    color: #2e3440;
+}
+
+.reply-button:hover {
+    background-color: #8fbcbb;
+}
+
+.cancel-button {
+    background-color: #d08770;
+    color: #2e3440;
+}
+
+.cancel-button:hover {
+    background-color: #bf616a;
+}
