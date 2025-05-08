@@ -93,6 +93,12 @@ def reply_in_topic_on_the_button(topic_id):
         return render_template('topic.html', topic=topic, posts=posts)
     return render_template('reply.html', topic=topic, form=form)
 
+@app.route('/posts/<int:post_id>/edit')
+@login_required
+def edit_post(post_id):
+    render_template()
+
+
 # function forum
 @app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])
 @login_required
@@ -101,7 +107,7 @@ def create_topic_on_the_button(forum_id):
     session = db_session.create_session()
     if form.validate_on_submit():
         topic = Topic(title=form.title.data, author_id=current_user.id,
-                    parent_type=TopicParentType.forum, parent_id=forum_id)
+                      parent_type=TopicParentType.forum, parent_id=forum_id)
         session.add(topic)
         session.commit()
         post = Post(content=form.content.data, author_id=current_user.id, topic_id=topic.id)
