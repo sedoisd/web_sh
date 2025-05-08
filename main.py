@@ -96,6 +96,8 @@ def reply_in_topic_on_the_button(topic_id):
 @app.route('/posts/<int:post_id>/edit')
 @login_required
 def edit_post(post_id):
+
+
     render_template()
 
 

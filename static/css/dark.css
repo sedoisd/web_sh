@@ -185,6 +185,7 @@ item-last-post {
 
 /* topic.css */
 .object-reply .reply {
+    color: white;
     background-color: #558BBD;
 }
 
@@ -218,6 +219,16 @@ item-last-post {
 
 .post::after {
     background: #505662;
+}
+
+.post-edit {
+    background-color: #3b414d;
+    color: #959faa;
+}
+
+.post-edit:hover {
+    background-color: #3d434f;
+    color: #a9b1c2
 }
 
 
@@ -304,3 +315,6 @@ item-last-post {
 .create-button:hover {
     background-color: #8fbcbb;
 }
+
+/* .css */
+

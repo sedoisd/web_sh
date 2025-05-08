@@ -28,14 +28,14 @@
         <article class="post" id="post-{{post.id}}">
             <div class="post-user-info">
                 <div class="post-user-avatar">
-                    <img src="" alt="User Avatar">
+                    <img src="/static/image/avatars/avatar.webp" alt="User Avatar">
                 </div>
                 <div class="post-user-info-other">
                     {{ post.author.nickname }}
                 </div>
             </div>
             <div class="post-content-info">
-                <div class="post-header">
+                <div class="post-content-header">
                     <span>27 Ноя 2024</span>
                     <a href="#post-{{post.id}}" class="post-number">#{{loop.index}}</a>
                 </div>
@@ -43,7 +43,7 @@
                     {{ post.content }}
                 </div>
                 <div class="post-content-footer">
-
+                    <a class="post-edit" href="/posts/{{post.id}}/edit">Редактировать</a>
                 </div>
             </div>
         </article>
