@@ -128,8 +128,15 @@ def edit_post(post_id):
 @app.route('/posts/<int:post_id>/delete')
 @login_required
 def delete_post(post_id):
-
-    pass
+    db_sess = db_session.create_session()
+    post = db_sess.query(Post).filter(Post.id == post_id, Post.author_id == current_user.id).first()
+    topic_id = post.topic_id
+    if post:
+        db_sess.delete(post)
+        db_sess.commit()
+    else:
+        abort(404)
+    return redirect(f'/topics/{topic_id}/')
 
 # function forum
 @app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])
