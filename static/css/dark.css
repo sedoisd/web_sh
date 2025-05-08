@@ -150,6 +150,14 @@ item-last-post {
 
 
 /* forums.css */
+.object-create .create-topic {
+    background-color: #558BBD;
+}
+
+.object-create .create-topic:hover {
+    background-color: #3b596c;
+}
+
 .forum {
     color: #bbb;
 }

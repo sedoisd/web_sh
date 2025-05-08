@@ -74,3 +74,27 @@
 }
 
 
+.object-create .create-topic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.object-create .create-topic i {
+    margin-right: 5px;
+}
+
+.management {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px
+}

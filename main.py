@@ -79,7 +79,7 @@ def topic(topic_id):
 # function topic
 @app.route('/topics/<int:topic_id>/reply', methods=['GET', 'POST'])
 @login_required
-def reply_in_topic(topic_id):
+def reply_in_topic_on_the_button(topic_id):
     form = TopicReplyForm()
     session = db_session.create_session()
     topic = session.query(Topic).filter(Topic.id == topic_id).first()
@@ -92,6 +92,13 @@ def reply_in_topic(topic_id):
         posts = session.query(Post).filter(Post.topic_id == topic.id).all()
         return render_template('topic.html', topic=topic, posts=posts)
     return render_template('reply.html', topic=topic, form=form)
+
+# function forum
+@app.route('/forums/<int:forum_id>/create_topic')
+@login_required
+def create_topic_on_the_button(forum_id):
+
+    return render_template('create_topic.html')
 
 
 # authorization

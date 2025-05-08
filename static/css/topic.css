@@ -1,5 +1,6 @@
 .posts {
     border-radius: 6px;
+
 }
 
 .post::after {
@@ -83,7 +84,7 @@
 }
 
 .object-reply .reply i {
-    margin-right: 5px; /* Отступ между иконкой и текстом */
+    margin-right: 5px;
 }
 
 .management {
