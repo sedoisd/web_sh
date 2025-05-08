@@ -1,5 +1,5 @@
 import datetime
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 from data import db_session
@@ -91,14 +91,36 @@ def reply_in_topic_on_the_button(topic_id):
         topic = session.query(Topic).filter(Topic.id == topic_id).first()
         posts = session.query(Post).filter(Post.topic_id == topic.id).all()
         return render_template('topic.html', topic=topic, posts=posts)
-    return render_template('reply.html', topic=topic, form=form)
+    return render_template('reply.html', topic=topic, form=form, text_mode='Ответ в теме')
 
-@app.route('/posts/<int:post_id>/edit')
+
+@app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_post(post_id):
-
-
-    render_template()
+    form = TopicReplyForm()
+    if request.method == "GET":
+        db_sess = db_session.create_session()
+        post = db_sess.query(Post).filter(Post.id == post_id, Post.author_id == current_user.id).first()
+        # if current_user.id ==  :
+        #     post = db_sess.query(Post).filter(Post.id == post_id).first()
+        if post:
+            form.content.data = post.content
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        post = db_sess.query(Post).filter(Post.id == post_id, Post.author_id == current_user.id).first()
+        # if current_user.id ==:
+        # post = db_sess.query(Post).filter(Post.id == post_id).first()
+        if post:
+            post.content = form.content.data
+            db_sess.commit()
+            return redirect(f'/topics/{post.topic_id}/')
+        else:
+            abort(404)
+    topic = db_sess.query(Topic).filter(Topic.id == Post.topic_id).first()
+    return render_template('reply.html', title='Редактирование темы', form=form,
+                           text_mode='Редактирование поста в теме ', topic=topic)
 
 
 # function forum
