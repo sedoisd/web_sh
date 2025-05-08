@@ -7,3 +7,9 @@ from wtforms.validators import DataRequired
 class TopicReplyForm(FlaskForm):
     content = TextAreaField('', validators=[DataRequired()])
     submit = SubmitField('Ответить')
+
+
+class TopicCreateForm(FlaskForm):
+    title = StringField('', validators=[DataRequired()])
+    content = TextAreaField('', validators=[DataRequired()])
+    sumbit = SubmitField('Создать')

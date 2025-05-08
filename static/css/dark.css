@@ -269,3 +269,38 @@ item-last-post {
 .cancel-button:hover {
     background-color: #bf616a;
 }
+
+/* create_topic.css */
+.create-form {
+    background-color: #313742;
+}
+
+.form-control-title {
+    background-color: #383d48;
+    color: #eceff4;
+    color: #b7c9d8;
+}
+
+.form-control-title::placeholder {
+    color: #6a717e;
+}
+
+
+.form-control-title:focus {
+    color: #b7c9d8;
+    border-color: #313742;
+    background-color: #313742;
+}
+
+.create-title {
+    color: #eceff4;
+}
+
+.create-button {
+    background-color: #558BBD;
+    color: #2e3440;
+}
+
+.create-button:hover {
+    background-color: #8fbcbb;
+}

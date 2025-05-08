@@ -1,5 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/create_topic.css')}}">
 
+
+<div class="container">
+    <div class="create-form">
+        <h1 class="create-title">Создание темы</h1>
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.title(class="form-control-title", placeholder="Введите название темы...") }}
+                {% for error in form.title.errors %}
+                <p class="alert alert-danger" role="alert">
+                    {{ error }}
+                </p>
+                {% endfor %}
+
+                {{ form.content(class="form-control", placeholder="Введите ваше сообщение...") }}
+                {% for error in form.content.errors %}
+                <p class="alert alert-danger" role="alert">
+                    {{ error }}
+                </p>
+                {% endfor %}
+            </div>
+            <button type="submit" class="create-button">Создать тему</button>
+            <a href="/forums/{{ forum_id }}/" class="cancel-button">Отменить</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textareas = document.querySelectorAll('.form-control');
+        textareas.forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+            textarea.dispatchEvent(new Event('input'));
+        });
+    });
+</script>
 {% endblock content %}
