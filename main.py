@@ -91,9 +91,11 @@ def reply_in_topic_on_the_button(topic_id):
         topic = session.query(Topic).filter(Topic.id == topic_id).first()
         posts = session.query(Post).filter(Post.topic_id == topic.id).all()
         return render_template('topic.html', topic=topic, posts=posts)
-    return render_template('reply.html', topic=topic, form=form, text_mode='Ответ в теме')
+    return render_template('reply.html', topic=topic, form=form, text_mode_title='Ответ в теме',
+                           text_mode_button='Отправить')
 
 
+# function post
 @app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_post(post_id):
@@ -120,8 +122,14 @@ def edit_post(post_id):
             abort(404)
     topic = db_sess.query(Topic).filter(Topic.id == Post.topic_id).first()
     return render_template('reply.html', title='Редактирование темы', form=form,
-                           text_mode='Редактирование поста в теме ', topic=topic)
+                           text_mode_title='Редактирование поста в теме ', text_mode_button='Изменить',
+                           topic=topic)
 
+@app.route('/posts/<int:post_id>/delete')
+@login_required
+def delete_post(post_id):
+
+    pass
 
 # function forum
 @app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])

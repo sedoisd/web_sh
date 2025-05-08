@@ -43,7 +43,10 @@
                     {{ post.content }}
                 </div>
                 <div class="post-content-footer">
-                    <a class="post-edit" href="/posts/{{post.id}}/edit">Редактировать</a>
+                    {% if current_user.id == post.author_id %}
+                    <a class="function-button" href="/posts/{{post.id}}/edit">Редактировать</a>
+                    <a class="function-button" href="/posts/{{post.id}}/delete">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </article>

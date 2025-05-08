@@ -221,12 +221,12 @@ item-last-post {
     background: #505662;
 }
 
-.post-edit {
+.function-button {
     background-color: #3b414d;
     color: #959faa;
 }
 
-.post-edit:hover {
+.function-button:hover {
     background-color: #3d434f;
     color: #a9b1c2
 }

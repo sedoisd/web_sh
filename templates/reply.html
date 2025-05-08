@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="reply-form">
-        <h1 class="reply-title">{{ text_mode }} - {{ topic.title }}</h1>
+        <h1 class="reply-title">{{ text_mode_title }} - {{ topic.title }}</h1>
         <form action="" method="post">
             {{ form.hidden_tag() }}
             <div class="form-group">
@@ -16,7 +16,7 @@
                 </p>
                 {% endfor %}
             </div>
-            <button type="submit" class="reply-button">Отправить ответ</button>
+            <button type="submit" class="reply-button">{{ text_mode_button }} ответ</button>
             <a href="/topics/{{ topic.id }}" class="cancel-button">Отменить</a>
         </form>
     </div>
