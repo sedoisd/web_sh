@@ -79,9 +79,15 @@ def topic(topic_id):
     posts = session.query(Post).filter(Post.topic_id == topic.id).all()
     return render_template('topic.html', topic=topic, posts=posts)
 
+#function forums
+@app.route('/forums/<int:forum_id>/delete')
+@login_required
+def delete_forum():
+    return
+
 
 # function topic
-@app.route('/topics/<int:topic_id>/reply', methods=['GET', 'POST'])
+@app.route('/topics/<int:topic_id>/reply', methods=['GET', 'POST']) # add post
 @login_required
 def reply_in_topic_on_the_button(topic_id):
     form = TopicReplyForm()
@@ -99,7 +105,7 @@ def reply_in_topic_on_the_button(topic_id):
                            text_mode_button='Отправить')
 
 
-@app.route('/topics/<int:topic_id>/delete')
+@app.route('/topics/<int:topic_id>/delete') # delete topic
 @login_required
 def delete_topic(topic_id):
     db_sess = db_session.create_session()
@@ -108,7 +114,10 @@ def delete_topic(topic_id):
         parent_id = topic.parent_id
         help_dict = {TopicParentType.forum: 'forums', TopicParentType.group: '/',
                      TopicParentType.category: 'categories'}
+        posts = db_sess.query(Post).filter(Post.topic_id == topic_id)
         db_sess.delete(topic)
+        for post in posts:
+            db_sess.delete(post)
         db_sess.commit()
     else:
         abort(404)
@@ -118,7 +127,7 @@ def delete_topic(topic_id):
 
 
 # function post
-@app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
+@app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])  # edit post
 @login_required
 def edit_post(post_id):
     form = TopicReplyForm()
@@ -149,7 +158,7 @@ def edit_post(post_id):
                            topic=topic)
 
 
-@app.route('/posts/<int:post_id>/delete')
+@app.route('/posts/<int:post_id>/delete') # delete post
 @login_required
 def delete_post(post_id):
     db_sess = db_session.create_session()
@@ -164,9 +173,9 @@ def delete_post(post_id):
 
 
 # function forum
-@app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])
+@app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])  # add topic
 @login_required
-def create_topic_on_the_button(forum_id):
+def create_topic(forum_id):
     form = TopicCreateForm()
     session = db_session.create_session()
     if form.validate_on_submit():

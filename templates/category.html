@@ -5,6 +5,10 @@
 
 <div class="category">
     <h1 class="category-title">{{ category.title }}</h1>
+    <a href="/#group-{{category.parent_id}}"
+       class="back-button">
+        <span class="back-arrow">&lt;</span> Назад
+    </a>
     <div class="category-items">
         {% for forum in forums %}
         <div class="category-item">

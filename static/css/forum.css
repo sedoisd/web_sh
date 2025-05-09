@@ -74,7 +74,7 @@
 }
 
 
-.object-create .create-topic {
+.function-objects .create-topic {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -88,7 +88,25 @@
     white-space: nowrap;
 }
 
-.object-create .create-topic i {
+.function-objects .create-topic i {
+    margin-right: 5px;
+}
+
+.function-objects .delete-forum {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.function-objects .delete-forum i {
     margin-right: 5px;
 }
 

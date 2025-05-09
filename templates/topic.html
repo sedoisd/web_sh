@@ -7,6 +7,9 @@
 <div class="topic">
     <div class="topic-header">
         <h1 class="topic-title">{{topic.title}}</h1>
+        <a href="/{{'categories' if topic.parent_type.value == 'category' else topic.parent_type.value + 's'}}/{{topic.parent_id}}/" class="back-button">
+            <span class="back-arrow">&lt;</span> Назад
+        </a>
     </div>
     <!--    -->
     <div class="management">
@@ -45,7 +48,7 @@
                 </div>
                 <div class="post-content-footer">
                     {% if post.modified_data %}
-                        <p>Последнее редактирование: {{post.modified_data.strftime("%d %b %Y")}}</p>
+                    <p>Последнее редактирование: {{post.modified_data.strftime("%d %b %Y")}}</p>
                     {% endif%}
                     {% if current_user.id == post.author_id %}
                     <a class="function-button" href="/posts/{{post.id}}/edit">Редактировать</a>

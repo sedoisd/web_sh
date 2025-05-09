@@ -18,6 +18,15 @@ body {
   font-family: sans-serif;
 }
 
+.back-button:hover {
+    background-color: #345b7a;
+}
+
+.back-button {
+    background-color: #2a475e;
+    color: #b7c0c7;
+}
+
 /* management page */
 .pagination {
     background-color: #313742
@@ -150,12 +159,20 @@ item-last-post {
 
 
 /* forums.css */
-.object-create .create-topic {
+.function-objects .create-topic {
     background-color: #558BBD;
 }
 
-.object-create .create-topic:hover {
+.function-objects .create-topic:hover {
     background-color: #3b596c;
+}
+
+.function-objects .delete-forum {
+    background-color: #dc3545;
+}
+
+.function-objects .delete-forum:hover {
+    background-color: #c82333;
 }
 
 .forum {

@@ -5,6 +5,10 @@
 
 <div class="forum">
     <h1 class="forum-title">вака</h1>
+    <a href="/{{'categories' if forum.parent_type.value == 'category' else topic.parent_type.value + 's'}}/{{forum.parent_id}}/"
+       class="back-button">
+        <span class="back-arrow">&lt;</span> Назад
+    </a>
     <div class="management">
         <div class="pagination">
             <a href="#">&laquo;</a>
@@ -15,7 +19,8 @@
             <a href="#">5</a>
             <a href="#">&raquo;</a>
         </div>
-        <div class="object-create">
+        <div class="function-objects">
+            <a href="/forums/{{forum.id}}/delete" class="delete-forum">Удалить подкатегорию</a>
             <a href="/forums/{{forum.id}}/create_topic" class="create-topic">Создать тему</a>
         </div>
     </div>
