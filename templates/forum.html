@@ -20,8 +20,12 @@
             <a href="#">&raquo;</a>
         </div>
         <div class="function-objects">
+            {% if current_user.is_authenticated %}
+            {% if forum.author_id == current_user.id %}
             <a href="/forums/{{forum.id}}/delete" class="delete-forum">Удалить подкатегорию</a>
+            {% endif %}
             <a href="/forums/{{forum.id}}/create_topic" class="create-topic">Создать тему</a>
+            {% endif %}
         </div>
     </div>
     <div class="forum-items">

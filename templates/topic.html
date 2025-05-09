@@ -23,8 +23,12 @@
             <a href="#">&raquo;</a>
         </div>
         <div class="function-objects">
+            {% if current_user.is_authenticated %}
+            {% if topic.author_id == current_user.id %}
             <a href="/topics/{{topic.id}}/delete" class="delete-topic">Удалить тему</a>
+            {% endif %}
             <a href="/topics/{{topic.id}}/reply" class="reply">Ответить</a>
+            {% endif %}
         </div>
     </div>
     <div class="posts">
