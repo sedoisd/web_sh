@@ -157,6 +157,22 @@ item-last-post {
     color: #aaa;
 }
 
+.function-objects .delete-category {
+    background-color: #dc3545;
+}
+
+.function-objects .delete-category:hover {
+    background-color: #c82333;
+}
+
+.function-objects .create-object-content {
+    background-color: #558BBD;
+}
+
+.function-objects .create-object-content:hover {
+    background-color: #3b596c;
+}
+
 
 /* forums.css */
 .function-objects .create-topic {

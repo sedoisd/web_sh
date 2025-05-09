@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/category.css')}}">
 
 <div class="category">
     <h1 class="category-title">{{ category.title }}</h1>
-    <a href="/#group-{{category.parent_id}}"
-       class="back-button">
-        <span class="back-arrow">&lt;</span> Назад
-    </a>
+    <div class="function-objects">
+        <a href="/#group-{{category.parent_id}}"
+           class="back-button">
+            <span class="back-arrow">&lt;</span> Назад
+        </a>
+        {% if current_user.is_authenticated %}
+        {% if category.author_id == current_user.id %}
+        <a href="/categories/{{category.id}}/delete" class="delete-category">Удалить категорию</a>
+        {% endif %}
+        <div class="menu">
+            <a href="#" class="create-object-content" id="create-content-button">Создать объект контента</a>
+            <div class="content-type-dropdown" id="content-type-dropdown">
+                <a href="/categories/{{ category.id }}/create_object_content?content_type=forum" class="dropdown-item">Форум</a>
+                <a href="/categories/{{ category.id }}/create_object_content?content_type=topic" class="dropdown-item">Топик</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
     <div class="category-items">
         {% for forum in forums %}
         <div class="category-item">
@@ -29,4 +44,28 @@
         {% endfor %}
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const menu = document.querySelector('.menu');
+    const createContentButton = document.getElementById('create-content-button');
+    const contentTypeDropdown = document.getElementById('content-type-dropdown');
+    function setDropdownWidth() {
+        const buttonWidth = createContentButton.offsetWidth;
+        contentTypeDropdown.style.width = buttonWidth + 'px';
+    }
+    setDropdownWidth();
+    window.addEventListener('resize', setDropdownWidth);
+    menu.addEventListener('mouseenter', function() {
+        setDropdownWidth()
+        contentTypeDropdown.classList.add('show');
+        createContentButton.setAttribute('aria-expanded', 'true');
+    });
+    menu.addEventListener('mouseleave', function() {
+        contentTypeDropdown.classList.remove('show');
+        createContentButton.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>
+
 {% endblock %}

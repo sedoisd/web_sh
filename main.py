@@ -36,9 +36,6 @@ def load_user(user_id):
 
 def main():
     db_session.global_init("db/forum_v2.db")
-    # session = db_session.create_session()
-    # post = session.query(Post).filter(Post.id == 1).first()
-    # print(post.author.email)
     app.run(port=8080, host='127.0.0.1')
 
 
@@ -53,7 +50,7 @@ def index():
                            forums_by_groups=forums_by_groups, topics_by_groups=topics_by_groups)
 
 
-# view
+# view  -----------------------------------------------------------------------------
 @app.route('/categories/<int:category_id>/')
 def categories(category_id):
     session = db_session.create_session()
@@ -79,15 +76,35 @@ def topic(topic_id):
     posts = session.query(Post).filter(Post.topic_id == topic.id).all()
     return render_template('topic.html', topic=topic, posts=posts)
 
-#function forums
-@app.route('/forums/<int:forum_id>/delete')
+
+#   --------------------------------------------------------------------------------------------
+# function forums  -----------------------------------------------------------------------------
+@app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])  # add topic
+@login_required
+def create_topic(forum_id):
+    form = TopicCreateForm()
+    session = db_session.create_session()
+    if form.validate_on_submit():
+        topic = Topic(title=form.title.data, author_id=current_user.id,
+                      parent_type=TopicParentType.forum, parent_id=forum_id)
+        session.add(topic)
+        session.commit()
+        post = Post(content=form.content.data, author_id=current_user.id, topic_id=topic.id)
+        session.add(post)
+        session.commit()
+        return redirect(f'/topics/{topic.id}/')
+    return render_template('create_topic.html', form=form, forum_id=forum_id)
+
+
+@app.route('/forums/<int:forum_id>/delete')  # delete forum
 @login_required
 def delete_forum():
     return
 
 
-# function topic
-@app.route('/topics/<int:topic_id>/reply', methods=['GET', 'POST']) # add post
+#   --------------------------------------------------------------------------------------------
+# function topic  ------------------------------------------------------------------------------
+@app.route('/topics/<int:topic_id>/reply', methods=['GET', 'POST'])  # add post in topic
 @login_required
 def reply_in_topic_on_the_button(topic_id):
     form = TopicReplyForm()
@@ -105,7 +122,7 @@ def reply_in_topic_on_the_button(topic_id):
                            text_mode_button='Отправить')
 
 
-@app.route('/topics/<int:topic_id>/delete') # delete topic
+@app.route('/topics/<int:topic_id>/delete')  # delete topic
 @login_required
 def delete_topic(topic_id):
     db_sess = db_session.create_session()
@@ -126,7 +143,8 @@ def delete_topic(topic_id):
     return redirect(f'/{help_dict[topic.parent_type]}/{parent_id}/')
 
 
-# function post
+#   --------------------------------------------------------------------------------------------
+# function post  -------------------------------------------------------------------------------
 @app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])  # edit post
 @login_required
 def edit_post(post_id):
@@ -158,7 +176,7 @@ def edit_post(post_id):
                            topic=topic)
 
 
-@app.route('/posts/<int:post_id>/delete') # delete post
+@app.route('/posts/<int:post_id>/delete')  # delete post
 @login_required
 def delete_post(post_id):
     db_sess = db_session.create_session()
@@ -172,25 +190,8 @@ def delete_post(post_id):
     return redirect(f'/topics/{topic_id}/')
 
 
-# function forum
-@app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])  # add topic
-@login_required
-def create_topic(forum_id):
-    form = TopicCreateForm()
-    session = db_session.create_session()
-    if form.validate_on_submit():
-        topic = Topic(title=form.title.data, author_id=current_user.id,
-                      parent_type=TopicParentType.forum, parent_id=forum_id)
-        session.add(topic)
-        session.commit()
-        post = Post(content=form.content.data, author_id=current_user.id, topic_id=topic.id)
-        session.add(post)
-        session.commit()
-        return redirect(f'/topics/{topic.id}/')
-    return render_template('create_topic.html', form=form, forum_id=forum_id)
-
-
-# authorization
+#   --------------------------------------------------------------------------------------------
+# authorization  -------------------------------------------------------------------------------
 @app.route('/logout')
 @login_required
 def logout():
