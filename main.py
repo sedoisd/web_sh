@@ -99,6 +99,24 @@ def reply_in_topic_on_the_button(topic_id):
                            text_mode_button='Отправить')
 
 
+@app.route('/topics/<int:topic_id>/delete')
+@login_required
+def delete_topic(topic_id):
+    db_sess = db_session.create_session()
+    topic = db_sess.query(Topic).filter(Topic.id == topic_id).first()
+    if topic:
+        parent_id = topic.parent_id
+        help_dict = {TopicParentType.forum: 'forums', TopicParentType.group: '/',
+                     TopicParentType.category: 'categories'}
+        db_sess.delete(topic)
+        db_sess.commit()
+    else:
+        abort(404)
+    if help_dict[topic.parent_type] == '/':
+        return redirect('/')
+    return redirect(f'/{help_dict[topic.parent_type]}/{parent_id}/')
+
+
 # function post
 @app.route('/posts/<int:post_id>/edit', methods=['GET', 'POST'])
 @login_required
@@ -130,6 +148,7 @@ def edit_post(post_id):
                            text_mode_title='Редактирование поста в теме ', text_mode_button='Изменить',
                            topic=topic)
 
+
 @app.route('/posts/<int:post_id>/delete')
 @login_required
 def delete_post(post_id):
@@ -142,6 +161,7 @@ def delete_post(post_id):
     else:
         abort(404)
     return redirect(f'/topics/{topic_id}/')
+
 
 # function forum
 @app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])

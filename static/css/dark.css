@@ -184,13 +184,22 @@ item-last-post {
 
 
 /* topic.css */
-.object-reply .reply {
+.function-objects .reply {
     color: white;
     background-color: #558BBD;
 }
 
-.object-reply .reply:hover {
+.function-objects .reply:hover {
     background-color: #3b596c;
+}
+
+.function-objects .delete-topic {
+    color: white;
+    background-color: #dc3545;
+}
+
+.function-objects .delete-topic:hover {
+    background-color: #c82333;
 }
 
 .posts {
@@ -280,12 +289,12 @@ item-last-post {
 }
 
 .cancel-button {
-    background-color: #d08770;
+    background-color: #dc3545;
     color: #2e3440;
 }
 
 .cancel-button:hover {
-    background-color: #bf616a;
+    background-color: #c82333;
 }
 
 /* create_topic.css */
