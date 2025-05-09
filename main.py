@@ -1,4 +1,6 @@
 import datetime
+# import locale
+
 from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -23,6 +25,8 @@ login_manager.init_app(app)
 app.config['SECRET_KEY'] = 'web_sh_ssd_creation'
 app.config['PERMANENT_SESSION_LIFETIME'] = datetime.timedelta(days=7)
 
+
+# locale.setlocale(locale.LC_TIME, 'ru_RU')
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -116,6 +120,7 @@ def edit_post(post_id):
         # post = db_sess.query(Post).filter(Post.id == post_id).first()
         if post:
             post.content = form.content.data
+            post.modified_data = datetime.datetime.now()
             db_sess.commit()
             return redirect(f'/topics/{post.topic_id}/')
         else:

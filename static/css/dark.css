@@ -231,6 +231,13 @@ item-last-post {
     color: #a9b1c2
 }
 
+.post-content-footer p {
+    color: #959faa
+}
+
+.post-content-header span {
+    color: #959faa
+}
 
 /* reply.css  */
 .reply-form {

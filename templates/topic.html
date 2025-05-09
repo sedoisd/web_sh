@@ -36,13 +36,16 @@
             </div>
             <div class="post-content-info">
                 <div class="post-content-header">
-                    <span>27 Ноя 2024</span>
+                    <span>{{post.created_data.strftime("%d %b %Y")}}</span>
                     <a href="#post-{{post.id}}" class="post-number">#{{loop.index}}</a>
                 </div>
                 <div class="post-content-data">
                     {{ post.content }}
                 </div>
                 <div class="post-content-footer">
+                    {% if post.modified_data %}
+                        <p>Последнее редактирование: {{post.modified_data.strftime("%d %b %Y")}}</p>
+                    {% endif%}
                     {% if current_user.id == post.author_id %}
                     <a class="function-button" href="/posts/{{post.id}}/edit">Редактировать</a>
                     <a class="function-button" href="/posts/{{post.id}}/delete">Удалить</a>

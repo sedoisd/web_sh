@@ -112,3 +112,11 @@
     font-size: 0.9em;
     transition: background-color 0.2s ease;
 }
+
+.post-content-footer p {
+    font-size: 0.8em
+}
+
+.post-content-header span {
+    font-size: 0.8em
+}
