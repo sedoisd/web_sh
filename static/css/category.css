@@ -117,25 +117,18 @@ item-last-post {
 
 .create-object-content {
     background-color: #2a475e;
-    color: #b7c0c7;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
     text-decoration: none;
     display: inline-block;
-}
-
-.create-object-content:hover {
-    background-color: #345b7a;
 }
 
 .content-type-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #2a475e;
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     overflow: hidden;
@@ -154,12 +147,8 @@ item-last-post {
 .dropdown-item {
     display: block;
     padding: 12px 16px;
-    color: #b7c0c7;
     text-decoration: none;
     transition: background-color 0.2s ease;
     white-space: nowrap;
 }
 
-.dropdown-item:hover {
-    background-color: #345b7a;
-}

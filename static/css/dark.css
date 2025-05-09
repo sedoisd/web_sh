@@ -44,6 +44,17 @@ body {
 .pagination a:hover:not(.active) {background-color: #242630;}
 
 
+.content-type-dropdown {
+    background-color: #2a475e;
+}
+
+.dropdown-item {
+    color: #b7c0c7;
+}
+
+.dropdown-item:hover {
+    background-color: #345b7a;
+}
 
 
 /* login.css */
@@ -172,6 +183,7 @@ item-last-post {
 .function-objects .create-object-content:hover {
     background-color: #3b596c;
 }
+
 
 
 /* forums.css */
