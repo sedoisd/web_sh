@@ -1,0 +1,92 @@
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.create-form {
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.create-title {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4c566a;
+    font-size: 1.5em;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4c566a;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    min-height: 50px;
+    overflow: hidden;
+    line-height: 1.6;
+    margin-bottom: 15px
+}
+
+.form-control:focus {
+    box-shadow: 0 0 5px rgba(136, 192, 208, 0.3);
+}
+
+.form-control-title {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4c566a;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1em;
+    box-sizing: border-box;
+    outline: none;
+    min-height: 50px;
+    overflow: hidden;
+    line-height: 1.6;
+}
+
+.form-control-title:focus {
+    box-shadow: 0 0 5px rgba(136, 192, 208, 0.3);
+}
+
+.form-control-title {
+    margin-bottom: 15px
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 0px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    border: 1px solid #d08770;
+}
+
+.create-button,
+.cancel-button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+}
+
+.cancel-button {
+    margin-left: 10px;
+}
+

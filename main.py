@@ -56,6 +56,11 @@ def index():
 
 
 # view  -----------------------------------------------------------------------------
+@app.route('/profile/<int:user_id>/')
+def profile(user_id):
+    return render_template('profile.html')
+
+
 @app.route('/categories/<int:category_id>/')
 def categories(category_id):
     session = db_session.create_session()
