@@ -25,7 +25,7 @@
         {% endif %}
     </div>
     <div class="category-items">
-        {% for forum in forums %}
+        {% for forum in forums_by_category %}
         <div class="category-item">
             <i class="item-icon"><img class="icon-object-image" src="/static/image/icon_object/forum.webp"></i>
             <div class="item-info">
@@ -39,6 +39,19 @@
             <div class="item-last-post">
                 <img src="" alt="User Avatar">
                 <p>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</p>
+            </div>
+        </div>
+        {% endfor %}
+        {% for topic in topics_by_category %}
+        <div class="category-item">
+            <i><img class="icon-object-image" src="/static/image/icon_object/link.webp"></i>
+            <div class="item-info">
+                <!--                <div class="item-tags">-->
+                <!--                    <span class="tag">Гайд</span>-->
+                <!--                    <span class="tag">Совет</span>-->
+                <!--                </div>-->
+                <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
+                <div class="item-author">{{topic.author_id}}</div>
             </div>
         </div>
         {% endfor %}

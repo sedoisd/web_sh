@@ -1,4 +1,6 @@
 import datetime
+
+import flask
 # import locale
 
 from flask import Flask, render_template, redirect, request, abort
@@ -12,6 +14,7 @@ from data.categories import Category, CategoryParentType
 from data.forums import Forum
 from data.topics import Topic
 from data.posts import Post
+from forms.object_content import ObjectContent
 
 from forms.user import RegisterForm, LoginForm
 from forms.topic import TopicReplyForm, TopicCreateForm
@@ -57,7 +60,10 @@ def categories(category_id):
     category = session.query(Category).filter(Category.id == category_id).first()
     forums = session.query(Forum).filter(Forum.parent_type == ForumParentType.category,
                                          Forum.parent_id == category.id).all()
-    return render_template('category.html', category=category, forums=forums)
+    topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.category,
+                                         Topic.parent_id == category_id).all()
+    return render_template('category.html', category=category, forums_by_category=forums,
+                           topics_by_category=topics)
 
 
 @app.route('/forums/<int:forum_id>/')
@@ -77,16 +83,44 @@ def topic(topic_id):
     return render_template('topic.html', topic=topic, posts=posts)
 
 
-
-
 #   --------------------------------------------------------------------------------------------
 # function categories  -----------------------------------------------------------------------------
-@app.route('/categories/<int:category_id>/create_object_content')
+@app.route('/categories/<int:category_id>/create_object_content',
+           methods=['GET', 'POST'])  # add topic/forum in category
 @login_required
-def create_objet_content_in_category():
-    return render_template('create_object_content')
-
-
+def create_objet_content_in_category(category_id):
+    content_type = request.args.get('content_type')
+    form = ObjectContent()
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        if content_type == 'topic':
+            print(form.content.data)
+            if form.content.data:
+                topic = Topic(title=form.object_name.data, author_id=current_user.id,
+                              parent_type=TopicParentType.category, parent_id=category_id)
+                session.add(topic)
+                session.commit()
+                post = Post(content=form.content.data, author_id=current_user.id, topic_id=topic.id)
+                session.add(post)
+                session.commit()
+                return redirect(f'/topics/{topic.id}/')
+        elif content_type == 'forum':
+            forum = Forum(title=form.object_name.data, author_id=current_user.id,
+                          parent_type=ForumParentType.category, parent_id=category_id)
+            session.add(forum)
+            session.commit()
+            return redirect(f'/forums/{forum.id}/')
+    if content_type == 'topic':
+        return render_template('create_object_content.html', form=form,
+                               text_name='темы', is_create_topic=True,
+                               back_path=f'/categories/{category_id}/')
+    elif content_type == 'forum':
+        form.content.data = 'Not False'
+        return render_template('create_object_content.html', form=form,
+                               is_create_topic=False, text_name='форума',
+                               back_path=f'/categories/{category_id}/')
+    else:
+        return abort(404)
 
 
 #   --------------------------------------------------------------------------------------------
@@ -95,8 +129,8 @@ def create_objet_content_in_category():
 @login_required
 def create_topic(forum_id):
     form = TopicCreateForm()
-    session = db_session.create_session()
     if form.validate_on_submit():
+        session = db_session.create_session()
         topic = Topic(title=form.title.data, author_id=current_user.id,
                       parent_type=TopicParentType.forum, parent_id=forum_id)
         session.add(topic)

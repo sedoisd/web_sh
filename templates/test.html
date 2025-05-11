@@ -75,40 +75,33 @@
         .content-type-selector button {
             width: 30%;
             padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
         }
 
         .content-type-selector button.active {
             background-color: #3e8e41;
+            color: white;
         }
 
-        /* Скрываем описание по умолчанию */
-        #description-label,
-        #description {
-            display: none;
-        }
-        #first-post-label,
-        #first-post {
-             display: none;
+        /* Поле контента неактивно по умолчанию */
+        #content {
+            pointer-events: none;
+            opacity: 0.6;
         }
 
-        #topic-button.active ~ #first-post-label,
-        #topic-button.active ~ #first-post {
-            display: block;
-        }
-        #category-button.active ~ #description-label,
-        #category-button.active ~ #description {
-            display: block;
-        }
-        #forum-button.active ~ #description-label,
-        #forum-button.active ~ #description {
-            display: block;
+        /* Поле контента активно для топика */
+        #topic-button.active ~ #content {
+            pointer-events: auto;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Создать объект контента</h1>
+    <h1>Создание контента</h1>
 
     <div class="content-type-selector">
         <button id="category-button" onclick="showForm('category')">Категория</button>
@@ -116,51 +109,49 @@
         <button id="topic-button" onclick="showForm('topic')" class="active">Топик</button>
     </div>
 
-    <label for="object-name">Название:</label>
-    <input type="text" id="object-name" name="object-name">
+    <label for="name_object">Название:</label>
+    <input type="text" id="name_object" name="name_object">
 
-    <label for="first-post" id="first-post-label">Первое сообщение:</label>
-    <textarea id="first-post" name="first-post"></textarea>
-
-    <label for="description" id="description-label">Описание:</label>
-    <textarea id="description" name="description"></textarea>
+    <label for="content">Содержание:</label>
+    <textarea id="content" name="content"></textarea>
 
     <button id="submit-button" onclick="handleSubmit()">Создать</button>
 </div>
 
 <script>
     function showForm(contentType) {
-        // Убираем active у всех кнопок
-        document.getElementById('category-button').classList.remove('active');
-        document.getElementById('forum-button').classList.remove('active');
-        document.getElementById('topic-button').classList.remove('active');
+        // Сбрасываем active у всех кнопок
+        document.querySelectorAll('.content-type-selector button').forEach(button => {
+            button.classList.remove('active');
+        });
 
-        // Добавляем active к выбранной кнопке
+        // Устанавливаем active для выбранной кнопки
         document.getElementById(contentType + '-button').classList.add('active');
+
+        // Обновляем состояние поля content (активно/неактивно)
+        const contentField = document.getElementById('content');
+        if (contentType === 'topic') {
+            contentField.disabled = false;
+        } else {
+            contentField.disabled = true;
+        }
     }
 
     function handleSubmit() {
-        const objectName = document.getElementById('object-name').value;
-        let content = "";
+        const nameObject = document.getElementById('name_object').value;
+        const content = document.getElementById('content').value;
         const contentType = document.querySelector('.content-type-selector button.active').id.replace('-button', '');
 
-        if (contentType === 'topic') {
-          content =  document.getElementById('first-post').value
-        }
-        else {
-             content =  document.getElementById('description').value
-        }
-
-
         console.log("Тип контента:", contentType);
-        console.log("Название:", objectName);
-        console.log("Содержимое:", content)
+        console.log("Название:", nameObject);
+        console.log("Содержание:", content);
 
         // Здесь можно добавить код для отправки данных на сервер
     }
 
-    // Изначально активен топик
+    // Инициализация: по умолчанию выбрана категория
     showForm('topic');
 </script>
+
 </body>
 </html>
