@@ -9,7 +9,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
-<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dark.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/dark.css')}}">
 
     <title>{{ title }}</title>
 </head>
@@ -50,17 +50,19 @@
     </div>
     <div>
         {% if current_user.is_authenticated %}
-        <a class="navbar-brand" href="/logout">{{ current_user.nickname }}</a>
+        <div class="dropdown">
+            <a href="#" class="dropdown-button" onclick="toggleDropdown(event)">
+                {{ current_user.nickname }}
+            </a>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="/profile/{{ current_user.id }}/">Профиль</a>
+                <a href="/logout">Выйти</a>
+            </div>
+        </div>
         {% else %}
         <div class="auth-search">
-            <a href="/login">
-                <i class="fa fa-key"></i>
-                Вход
-            </a>
-            <a href="/register">
-                <i class="fa fa-clipboard"></i>
-                Регистрация
-            </a>
+            <a href="/login"><i class="fa fa-key"></i>Вход</a>
+            <a href="/register"><i class="fa fa-clipboard"></i>Регистрация</a>
             <!--        <form action="/search" method="GET">-->
             <!--            <input type="search" placeholder="Поиск..." name="query">-->
             <!--            <button type="submit">-->
@@ -71,23 +73,29 @@
         {% endif %}
     </div>
 </div>
-<!--<div class="header">-->
-<!--    <div>-->
-<!--        <img src="" alt="Logo" style="vertical-align: middle;">-->
-<!--        <a href="#">Форумы</a>-->
-<!--        <a href="#">Что нового?</a>-->
-<!--        <a href="#">Пользователи</a>-->
-<!--        <a href="#">Wiki</a>-->
-<!--    </div>-->
-<!--    <div class="auth">-->
-<!--        <a href="#">Вход</a>-->
-<!--        <a href="#">Регистрация</a>-->
-<!--        <img src="" alt="Search">-->
-<!--    </div>-->
-<!--</div>-->
 <main role="main" class="container" style="margin-top: 50px">
     {% block content %}{% endblock %}
 </main>
+
+<script>
+    function toggleDropdown(event) {
+        event.preventDefault();
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropdown-button')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>
+
 

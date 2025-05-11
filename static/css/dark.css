@@ -18,6 +18,27 @@ body {
   font-family: sans-serif;
 }
 
+.dropdown-button {
+    color: #959faa;
+}
+
+.dropdown-button:hover {
+    color: #a9b1c2
+}
+
+.dropdown-content {
+    background-color: #383d48;
+}
+
+.dropdown-content a {
+    color: #959fb4;
+}
+
+.dropdown-content a:hover {
+    background-color: #424751;
+}
+
+
 .back-button:hover {
     background-color: #345b7a;
 }
