@@ -77,6 +77,18 @@ def topic(topic_id):
     return render_template('topic.html', topic=topic, posts=posts)
 
 
+
+
+#   --------------------------------------------------------------------------------------------
+# function categories  -----------------------------------------------------------------------------
+@app.route('/categories/<int:category_id>/create_object_content')
+@login_required
+def create_objet_content_in_category():
+    return render_template('create_object_content')
+
+
+
+
 #   --------------------------------------------------------------------------------------------
 # function forums  -----------------------------------------------------------------------------
 @app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])  # add topic
@@ -218,7 +230,7 @@ def login():
 
 
 @app.route('/register', methods=['GET', 'POST'])
-def reqister():
+def register():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:

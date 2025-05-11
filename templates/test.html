@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ответ в теме</title>
+    <title>Создать объект контента</title>
     <style>
+        /* Общие стили */
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #282a36; /* Dracula background */
-            color: #f8f8f2; /* Dracula foreground */
+            font-family: sans-serif;
+            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,106 +18,149 @@
         }
 
         .container {
-            width: 80%;
-            max-width: 800px;
-            margin: 20px auto;
+            background-color: #fff;
             padding: 20px;
-        }
-
-        .reply-form {
-            background-color: #44475a; /* Dracula comment */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 500px;
         }
 
-        .reply-title {
-            color: #bd93f9; /* Dracula variable */
-            margin-bottom: 20px;
-            border-bottom: 1px solid #6272a4;
-            padding-bottom: 10px;
-        }
-
-        .form-group {
+        h1 {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .form-group label {
+        label {
             display: block;
-            color: #f8f8f2; /* Dracula foreground */
             margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        .form-control {
+        input[type="text"],
+        textarea {
             width: 100%;
             padding: 10px;
-            border: 1px solid #6272a4;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: #343746;
-            color: #f8f8f2;
-            font-family: inherit;
-            font-size: 1em;
+            box-sizing: border-box;
+            font-size: 16px;
         }
 
-        .form-control:focus {
-            outline: none;
-            border-color: #8be9fd; /* Dracula cyan */
-            box-shadow: 0 0 5px rgba(139, 233, 253, 0.5);
+        textarea {
+            height: 150px;
         }
 
-        .errors {
-            list-style: none;
-            padding: 0;
-            margin-top: 5px;
-            color: #ff79c6; /* Dracula pink */
-        }
-
-        .reply-button, .cancel-button {
-            padding: 10px 20px;
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
             border: none;
             border-radius: 4px;
-            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s ease;
-            text-decoration: none;
-            display: inline-block; /* Для правильного отображения отступов */
+            font-size: 16px;
         }
 
-        .reply-button {
-            background-color: #50fa7b; /* Dracula green */
-            color: #282a36;
+        button:hover {
+            background-color: #3e8e41;
         }
 
-        .reply-button:hover {
-            background-color: #8be9fd; /* Dracula cyan */
+        /* Стили для выбора типа контента */
+        .content-type-selector {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
         }
 
-        .cancel-button {
-            background-color: #ff79c6; /* Dracula pink */
-            color: #282a36;
-            margin-left: 10px;
+        .content-type-selector button {
+            width: 30%;
+            padding: 10px;
         }
 
-        .cancel-button:hover {
-            background-color: #bd93f9; /* Dracula variable */
+        .content-type-selector button.active {
+            background-color: #3e8e41;
+        }
+
+        /* Скрываем описание по умолчанию */
+        #description-label,
+        #description {
+            display: none;
+        }
+        #first-post-label,
+        #first-post {
+             display: none;
+        }
+
+        #topic-button.active ~ #first-post-label,
+        #topic-button.active ~ #first-post {
+            display: block;
+        }
+        #category-button.active ~ #description-label,
+        #category-button.active ~ #description {
+            display: block;
+        }
+        #forum-button.active ~ #description-label,
+        #forum-button.active ~ #description {
+            display: block;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="reply-form">
-        <h1 class="reply-title">Ответ в теме - {{topic.title}}</h1>
-        <form>
-            <div class="form-group">
-                <textarea class="form-control" placeholder="Введите ваш ответ..."></textarea>
-            </div>
+    <h1>Создать объект контента</h1>
 
-            <button type="submit" class="reply-button">Отправить ответ</button>
-            <a href="#" class="cancel-button">Отменить</a>
-        </form>
+    <div class="content-type-selector">
+        <button id="category-button" onclick="showForm('category')">Категория</button>
+        <button id="forum-button" onclick="showForm('forum')">Форум</button>
+        <button id="topic-button" onclick="showForm('topic')" class="active">Топик</button>
     </div>
+
+    <label for="object-name">Название:</label>
+    <input type="text" id="object-name" name="object-name">
+
+    <label for="first-post" id="first-post-label">Первое сообщение:</label>
+    <textarea id="first-post" name="first-post"></textarea>
+
+    <label for="description" id="description-label">Описание:</label>
+    <textarea id="description" name="description"></textarea>
+
+    <button id="submit-button" onclick="handleSubmit()">Создать</button>
 </div>
 
+<script>
+    function showForm(contentType) {
+        // Убираем active у всех кнопок
+        document.getElementById('category-button').classList.remove('active');
+        document.getElementById('forum-button').classList.remove('active');
+        document.getElementById('topic-button').classList.remove('active');
+
+        // Добавляем active к выбранной кнопке
+        document.getElementById(contentType + '-button').classList.add('active');
+    }
+
+    function handleSubmit() {
+        const objectName = document.getElementById('object-name').value;
+        let content = "";
+        const contentType = document.querySelector('.content-type-selector button.active').id.replace('-button', '');
+
+        if (contentType === 'topic') {
+          content =  document.getElementById('first-post').value
+        }
+        else {
+             content =  document.getElementById('description').value
+        }
+
+
+        console.log("Тип контента:", contentType);
+        console.log("Название:", objectName);
+        console.log("Содержимое:", content)
+
+        // Здесь можно добавить код для отправки данных на сервер
+    }
+
+    // Изначально активен топик
+    showForm('topic');
+</script>
 </body>
 </html>
