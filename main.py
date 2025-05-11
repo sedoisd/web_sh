@@ -94,7 +94,6 @@ def create_objet_content_in_category(category_id):
     if form.validate_on_submit():
         session = db_session.create_session()
         if content_type == 'topic':
-            print(form.content.data)
             if form.content.data:
                 topic = Topic(title=form.object_name.data, author_id=current_user.id,
                               parent_type=TopicParentType.category, parent_id=category_id)
@@ -104,6 +103,8 @@ def create_objet_content_in_category(category_id):
                 session.add(post)
                 session.commit()
                 return redirect(f'/topics/{topic.id}/')
+            else:
+                form.content.errors.append('Вы пропустили это поле.')
         elif content_type == 'forum':
             forum = Forum(title=form.object_name.data, author_id=current_user.id,
                           parent_type=ForumParentType.category, parent_id=category_id)
@@ -113,12 +114,11 @@ def create_objet_content_in_category(category_id):
     if content_type == 'topic':
         return render_template('create_object_content.html', form=form,
                                text_name='темы', is_create_topic=True,
-                               back_path=f'/categories/{category_id}/')
+                               back_path=f'/categories/{category_id}/', type_name='тема')
     elif content_type == 'forum':
-        form.content.data = 'Not False'
         return render_template('create_object_content.html', form=form,
                                is_create_topic=False, text_name='форума',
-                               back_path=f'/categories/{category_id}/')
+                               back_path=f'/categories/{category_id}/', type_name='форум')
     else:
         return abort(404)
 
