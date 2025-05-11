@@ -7,7 +7,8 @@
 <div class="topic">
     <div class="topic-header">
         <h1 class="topic-title">{{topic.title}}</h1>
-        <a href="/{{'categories' if topic.parent_type.value == 'category' else topic.parent_type.value + 's'}}/{{topic.parent_id}}/" class="back-button">
+        <a href="/{{'categories' if topic.parent_type.value == 'category' else topic.parent_type.value + 's'}}/{{topic.parent_id}}/"
+           class="back-button">
             <span class="back-arrow">&lt;</span> Назад
         </a>
     </div>
@@ -24,10 +25,13 @@
         </div>
         <div class="function-objects">
             {% if current_user.is_authenticated %}
-            {% if topic.author_id == current_user.id %}
+            {% if (topic.author_id == current_user.id and current_user.is_permitted('delete_own_topic')) or
+            current_user.is_permitted('delete_any_topic') %}
             <a href="/topics/{{topic.id}}/delete" class="delete-topic">Удалить тему</a>
             {% endif %}
+            {% if current_user.is_permitted('create_post') %}
             <a href="/topics/{{topic.id}}/reply" class="reply">Ответить</a>
+            {% endif %}
             {% endif %}
         </div>
     </div>
@@ -54,9 +58,15 @@
                     {% if post.modified_data %}
                     <p>Последнее редактирование: {{post.modified_data.strftime("%d %b %Y")}}</p>
                     {% endif%}
-                    {% if current_user.id == post.author_id %}
+                    {% if current_user.is_authenticated %}
+                    {% if (post.author_id == current_user.id and current_user.is_permitted('edit_own_post')) or
+                    current_user.is_permitted('edit_any_post') %}
                     <a class="function-button" href="/posts/{{post.id}}/edit">Редактировать</a>
+                    {% endif %}
+                    {% if (post.author_id == current_user.id and current_user.is_permitted('delete_own_post')) or
+                    current_user.is_permitted('delete_any_post') %}
                     <a class="function-button" href="/posts/{{post.id}}/delete">Удалить</a>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>

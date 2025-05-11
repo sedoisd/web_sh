@@ -14,8 +14,10 @@ from data.categories import Category, CategoryParentType
 from data.forums import Forum
 from data.topics import Topic
 from data.posts import Post
-from forms.object_content import ObjectContent
+from data.permissions import Permission
+from data.roles import Role
 
+from forms.object_content import ObjectContent
 from forms.user import RegisterForm, LoginForm
 from forms.topic import TopicReplyForm, TopicCreateForm
 from sqlalchemy import or_
@@ -38,7 +40,7 @@ def load_user(user_id):
 
 
 def main():
-    db_session.global_init("db/forum_v2.db")
+    db_session.global_init("db/forum_v3.db")
     app.run(port=8080, host='127.0.0.1')
 
 
@@ -144,7 +146,9 @@ def create_topic(forum_id):
 
 @app.route('/forums/<int:forum_id>/delete')  # delete forum
 @login_required
-def delete_forum():
+def delete_forum(forum_id):
+    session = db_session.create_session()
+    forum = session.query(Forum).filter(Forum.id)
     return
 
 
@@ -197,23 +201,27 @@ def edit_post(post_id):
     form = TopicReplyForm()
     if request.method == "GET":
         db_sess = db_session.create_session()
-        post = db_sess.query(Post).filter(Post.id == post_id, Post.author_id == current_user.id).first()
-        # if current_user.id ==  :
-        #     post = db_sess.query(Post).filter(Post.id == post_id).first()
+        post = db_sess.query(Post).filter(Post.id == post_id).first()
         if post:
-            form.content.data = post.content
+            if ((post.author_id == current_user.id and current_user.is_permitted('edit_own_post')) or
+                    current_user.is_permitted('edit_any_post')):
+                form.content.data = post.content
+            else:
+                abort(403)
         else:
             abort(404)
     if form.validate_on_submit():
         db_sess = db_session.create_session()
-        post = db_sess.query(Post).filter(Post.id == post_id, Post.author_id == current_user.id).first()
-        # if current_user.id ==:
-        # post = db_sess.query(Post).filter(Post.id == post_id).first()
+        post = db_sess.query(Post).filter(Post.id == post_id).first()
         if post:
-            post.content = form.content.data
-            post.modified_data = datetime.datetime.now()
-            db_sess.commit()
-            return redirect(f'/topics/{post.topic_id}/')
+            if ((post.author_id == current_user.id and current_user.is_permitted('edit_own_post')) or
+                    current_user.is_permitted('edit_any_post')):
+                post.content = form.content.data
+                post.modified_data = datetime.datetime.now()
+                db_sess.commit()
+                return redirect(f'/topics/{post.topic_id}/')
+            else:
+                abort(403)
         else:
             abort(404)
     topic = db_sess.query(Topic).filter(Topic.id == Post.topic_id).first()
@@ -226,11 +234,15 @@ def edit_post(post_id):
 @login_required
 def delete_post(post_id):
     db_sess = db_session.create_session()
-    post = db_sess.query(Post).filter(Post.id == post_id, Post.author_id == current_user.id).first()
+    post = db_sess.query(Post).filter(Post.id == post_id).first()
     topic_id = post.topic_id
     if post:
-        db_sess.delete(post)
-        db_sess.commit()
+        if ((post.author_id == current_user.id and current_user.is_permitted('delete_own_post')) or
+                current_user.is_permitted('delete_any_post')):
+            db_sess.delete(post)
+            db_sess.commit()
+        else:
+            abort(403)
     else:
         abort(404)
     return redirect(f'/topics/{topic_id}/')

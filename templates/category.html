@@ -12,9 +12,10 @@
             <span class="back-arrow">&lt;</span> Назад
         </a>
         {% if current_user.is_authenticated %}
-        {% if category.author_id == current_user.id %}
+        {% if current_user.is_permitted('delete_category') %}
         <a href="/categories/{{category.id}}/delete" class="delete-category">Удалить категорию</a>
         {% endif %}
+        {% if current_user.is_permitted('create_object_content_in_category') %}
         <div class="menu">
             <a href="#" class="create-object-content" id="create-content-button">Создать объект контента</a>
             <div class="content-type-dropdown" id="content-type-dropdown">
@@ -22,6 +23,7 @@
                 <a href="/categories/{{ category.id }}/create_object_content?content_type=topic" class="dropdown-item">Топик</a>
             </div>
         </div>
+        {% endif %}
         {% endif %}
     </div>
     <div class="category-items">

@@ -21,10 +21,12 @@
         </div>
         <div class="function-objects">
             {% if current_user.is_authenticated %}
-            {% if forum.author_id == current_user.id %}
+            {% if current_user.is_permitted('delete_forum') %}
             <a href="/forums/{{forum.id}}/delete" class="delete-forum">Удалить подкатегорию</a>
             {% endif %}
+            {% if current_user.is_permitted('create_topic') %}
             <a href="/forums/{{forum.id}}/create_topic" class="create-topic">Создать тему</a>
+            {% endif %}
             {% endif %}
         </div>
     </div>

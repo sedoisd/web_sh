@@ -4,3 +4,5 @@ from . import categories
 from . import forums
 from . import topics
 from . import posts
+from . import roles
+from . import permissions
