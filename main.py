@@ -300,6 +300,9 @@ def register():
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
+        auth_role = db_sess.query(Role).filter(Role.title == 'register_user').first()
+        user.roles.append(auth_role)
+        db_sess.commit()
         return redirect('/login')
     return render_template('register.html', title='Регистрация', form=form)
 
