@@ -1,0 +1,128 @@
+        /* Контейнер блока профиля */
+        .profile-block {
+            max-width: 900px; /* Примерная ширина блока */
+            background-color: #2c3e50; /* Темный фон для блока */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* Растягиваем элементы на всю ширину */
+        }
+
+        /* Секция с информацией о пользователе */
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        /* Аватар пользователя */
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            background-color: #3498db; /* Голубой фон для аватара */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3em;
+            margin-right: 15px;
+        }
+
+        /* Имя пользователя и статус */
+        .user-details {
+            flex: 1; /* Занимаем все доступное пространство */
+        }
+
+        .user-name {
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .user-status {
+            font-size: 0.9em;
+            color: #999;
+        }
+
+        /* Иконка времени */
+        .user-details span {
+            display: flex; /* Располагаем иконку и текст в ряд */
+            align-items: center;
+        }
+
+        .user-details span img {
+            width: 15px; /* Размер иконки */
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        /* Кнопка "Жалоба" */
+        .report-button {
+            background-color: #34495e;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            align-self: flex-start; /* Выравниваем по верхнему краю */
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .report-button:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Секция со статистикой */
+        .user-stats {
+            display: flex;
+            justify-content: space-around; /* Распределяем пространство между элементами */
+            padding: 15px 0;
+            border-bottom: 1px solid #34495e;
+            margin-bottom: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        /* Секция с дополнительной информацией */
+        .user-footer {
+            font-size: 0.8em;
+            color: #999;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Кнопка "Найти" */
+        .find-button {
+            background-color: #34495e;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+
+        .find-button:hover {
+            background-color: #2c3e50;
+        }

@@ -1,5 +1,36 @@
 {% extends "base.html" %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/profile.css')}}">
 
+<div class="profile-block">
+    <div class="user-info">
+        <div class="user-avatar">S</div>
+        <div class="user-details">
+            <div class="user-name">SerakD <img src="" alt="Время"></div>
+            <div class="user-status">Новичок</div>
+        </div>
+        <a href="#" class="report-button">Жалоба</a>
+    </div>
+
+    <div class="user-stats">
+        <div class="stat-item">
+            <div class="stat-label">Сообщения</div>
+            <div class="stat-value">1</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Реакции</div>
+            <div class="stat-value">0</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-label">Баллы</div>
+            <div class="stat-value">1</div>
+        </div>
+    </div>
+
+    <div class="user-footer">
+        <div>Регистрация: 22 Мар 2022 · Активность: 1 минуту назад · Просматривает профиль пользователя SerakD</div>
+        <button class="find-button">Найти</button>
+    </div>
+</div>
 {% endblock content %}
