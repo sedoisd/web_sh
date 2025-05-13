@@ -1,128 +1,101 @@
-        /* Контейнер блока профиля */
-        .profile-block {
-            max-width: 900px; /* Примерная ширина блока */
-            background-color: #2c3e50; /* Темный фон для блока */
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch; /* Растягиваем элементы на всю ширину */
-        }
+.profile-block {
+    align: center
+    max-width: 450px;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+}
 
-        /* Секция с информацией о пользователе */
-        .user-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
 
-        /* Аватар пользователя */
-        .user-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 8px;
-            background-color: #3498db; /* Голубой фон для аватара */
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 3em;
-            margin-right: 15px;
-        }
+.user-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    margin-right: 15px;
+}
 
-        /* Имя пользователя и статус */
-        .user-details {
-            flex: 1; /* Занимаем все доступное пространство */
-        }
+.user-details {
+    flex: 1;
+}
 
-        .user-name {
-            font-size: 1.3em;
-            font-weight: bold;
-        }
+.user-name {
+    font-size: 1.3em;
+    font-weight: bold;
+}
 
-        .user-status {
-            font-size: 0.9em;
-            color: #999;
-        }
+.user-status {
+    font-size: 0.9em;
+}
 
-        /* Иконка времени */
-        .user-details span {
-            display: flex; /* Располагаем иконку и текст в ряд */
-            align-items: center;
-        }
+.user-details span {
+    display: flex;
+    align-items: center;
+}
 
-        .user-details span img {
-            width: 15px; /* Размер иконки */
-            margin-left: 5px;
-            vertical-align: middle;
-        }
+.user-details span img {
+    width: 15px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
 
-        /* Кнопка "Жалоба" */
-        .report-button {
-            background-color: #34495e;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            align-self: flex-start; /* Выравниваем по верхнему краю */
-            transition: background-color 0.3s ease;
-            text-decoration: none;
-        }
+.report-button {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
 
-        .report-button:hover {
-            background-color: #2c3e50;
-        }
+.user-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+}
 
-        /* Секция со статистикой */
-        .user-stats {
-            display: flex;
-            justify-content: space-around; /* Распределяем пространство между элементами */
-            padding: 15px 0;
-            border-bottom: 1px solid #34495e;
-            margin-bottom: 15px;
-        }
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+.stat-label {
+    font-size: 0.8em;
+    margin-bottom: 5px;
+}
 
-        .stat-label {
-            font-size: 0.8em;
-            color: #999;
-            margin-bottom: 5px;
-        }
+.stat-value {
+    font-size: 1.1em;
+    font-weight: bold;
+}
 
-        .stat-value {
-            font-size: 1.1em;
-            font-weight: bold;
-        }
+.user-footer {
+    font-size: 0.8em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        /* Секция с дополнительной информацией */
-        .user-footer {
-            font-size: 0.8em;
-            color: #999;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.find-button {
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
 
-        /* Кнопка "Найти" */
-        .find-button {
-            background-color: #34495e;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
-
-        .find-button:hover {
-            background-color: #2c3e50;
-        }
