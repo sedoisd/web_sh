@@ -15,8 +15,12 @@ class User(SqlAlchemyBase, UserMixin):
     email = sqlalchemy.Column(sqlalchemy.String, unique=True, nullable=True)
     hashed_password = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
+
     has_avatar = sqlalchemy.Column(sqlalchemy.Boolean, nullable=False, default=False)
     avatar_format = sqlalchemy.Column(sqlalchemy.String)
+
+    has_ban = sqlalchemy.Column(sqlalchemy.Boolean, nullable=False, default=False)
+    reason_ban = sqlalchemy.Column(sqlalchemy.String)
 
     roles = sqlalchemy.orm.relationship("Role",
                                   secondary="role_to_user",

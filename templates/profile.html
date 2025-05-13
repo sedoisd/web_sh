@@ -18,8 +18,15 @@
         <div class="menu-other">
             <a href="#" class="other-function" id="other-function-button">...</a>
             <div class="function-type-dropdown" id="function-type-dropdown">
-                <a href="#" class="dropdown-item">Форум</a>
-                <a href="#" class="dropdown-item">Топик</a>
+                {% if current_user.is_authenticated %}
+                <a href="/create_complaint?user_id={{view_user.id}}&root=profile" class="dropdown-item">Жалоба</a>
+                {% if current_user.is_permitted('ban_users') and not view_user.has_ban %}
+                <a href="/ban/{{view_user.id}}" class="dropdown-item">Заблокировать</a>
+                {% endif %}
+                {%  if current_user.is_permitted('unban_users') and view_user.has_ban %}
+                <a href="/unban/{{view_user.id}}" class="dropdown-item">Разблокировать</a>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
