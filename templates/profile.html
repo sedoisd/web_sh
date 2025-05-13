@@ -5,27 +5,57 @@
 
 <div class="profile-block">
     <div class="user-info">
-        <div class="user-avatar">S</div>
-        <div class="user-details">
-            <div class="user-name">{{view_user.}}</div>
-            <div class="user-roles">Новичок</div>
+        <div class="user-avatar"><img src="/static/image/avatars/avatar_{{view_user.id}}.{{view_user.avatar_format}}">
         </div>
-        <a href="#" class="report-button">Жалоба</a>
+        <div class="user-details">
+            <div class="user-name">{{view_user.nickname}}</div>
+            <div class="user-roles">
+                {% for role in view_user.roles %}
+                <div style="background-color: #{{role.background_color}}">{{role.title_on_russian}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="menu-other">
+            <a href="#" class="other-function" id="other-function-button">...</a>
+            <div class="function-type-dropdown" id="function-type-dropdown">
+                <a href="#" class="dropdown-item">Форум</a>
+                <a href="#" class="dropdown-item">Топик</a>
+            </div>
+        </div>
     </div>
 
     <div class="user-stats">
         <div class="stat-item">
             <div class="stat-label">Сообщения</div>
-            <div class="stat-value">1</div>
+            <div class="stat-value">{{view_user.posts|length}}</div>
         </div>
         <div class="stat-item">
             <div class="stat-label">Дата регистрации</div>
-            <div class="stat-value">xx.xx.xxx</div>
+            <div class="stat-value">{{view_user.created_date.strftime("%d %b %Y")}}</div>
         </div>
     </div>
-
-    <div class="user-footer">
-
-    </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const menu = document.querySelector('.menu-other');
+    const createContentButton = document.getElementById('other-function-button');
+    const contentTypeDropdown = document.getElementById('function-type-dropdown');
+    function setDropdownWidth() {
+        const buttonWidth = createContentButton.offsetWidth;
+        contentTypeDropdown.style.width = buttonWidth + 'px';
+    }
+    setDropdownWidth();
+    window.addEventListener('resize', setDropdownWidth);
+    menu.addEventListener('mouseenter', function() {
+        contentTypeDropdown.classList.add('show');
+        createContentButton.setAttribute('aria-expanded', 'true');
+    });
+    menu.addEventListener('mouseleave', function() {
+        contentTypeDropdown.classList.remove('show');
+        createContentButton.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>
 {% endblock content %}

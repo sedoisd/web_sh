@@ -18,6 +18,7 @@ class Role(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     title = sqlalchemy.Column(sqlalchemy.String, nullable=False, unique=True)
     title_on_russian = sqlalchemy.Column(sqlalchemy.String, nullable=False, unique=True)
+    background_color = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     description = sqlalchemy.Column(sqlalchemy.String)
 
     permissions = orm.relationship("Permission",

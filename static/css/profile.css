@@ -33,6 +33,7 @@
 .user-name {
     font-size: 1.3em;
     font-weight: bold;
+    padding-left: 2px;
 }
 
 .user-status {
@@ -64,7 +65,6 @@
 .user-stats {
     display: flex;
     justify-content: space-around;
-    padding: 15px 0;
 }
 
 .stat-item {
@@ -83,19 +83,79 @@
     font-weight: bold;
 }
 
-.user-footer {
-    font-size: 0.8em;
+.user-roles {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
 }
 
-.find-button {
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s ease;
+.user-roles div {
+    margin-right: 5px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 0.8em;
+    white-space: nowrap;
 }
+
+.user-roles div:last-child {
+    margin-right: 0;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius:50px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/*  other list  */
+
+.menu-other {
+    position: relative;
+    display: inline-block;
+}
+
+.other-function {
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+}
+
+.function-type-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s ease 0.3s;
+    width: 100%;
+    min-width: fit-content;
+}
+
+.function-type-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 

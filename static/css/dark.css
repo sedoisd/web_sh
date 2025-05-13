@@ -205,6 +205,9 @@ item-last-post {
     background-color: #3b596c;
 }
 
+.create-object-content {
+    background-color: #2a475e;
+}
 
 
 /* forums.css */
@@ -408,11 +411,6 @@ item-last-post {
     border-bottom: 4px solid #505662;
 }
 
-.user-avatar {
-    color: #fff;
-    background-color: #3498db;
-}
-
 .user-status {
     color: #999;
 }
@@ -442,3 +440,23 @@ item-last-post {
 .find-button:hover {
     background-color: #2c3e50;
 }
+
+.other-function {
+    background-color: #313742;
+    border: 2px solid #505662;
+}
+
+.function-type-dropdown {
+    background-color: #2a475e;
+}
+
+.dropdown-item {
+    color: #fff;
+}
+
+.dropdown-item:hover {
+    background-color: #34495e;
+}
+
+
+/*          */
