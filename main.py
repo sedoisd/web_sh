@@ -89,7 +89,13 @@ def topic(topic_id):
     session = db_session.create_session()
     topic = session.query(Topic).filter(Topic.id == topic_id).first()
     posts = session.query(Post).filter(Post.topic_id == topic.id).all()
-    return render_template('topic.html', topic=topic, posts=posts)
+    if topic.parent_type == TopicParentType.group:
+        back_path = '/'
+    elif topic.parent_type == TopicParentType.category:
+        back_path = f'/categories/{topic.parent_id}/'
+    elif topic.parent_type == TopicParentType.forum:
+        back_path = f'/forums/{topic.parent_id}/'
+    return render_template('topic.html', topic=topic, posts=posts, back_path=back_path)
 
 
 #   --------------------------------------------------------------------------------------------
