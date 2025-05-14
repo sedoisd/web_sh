@@ -5,7 +5,12 @@
 
 <div class="profile-block">
     <div class="user-info">
-        <div class="user-avatar"><img src="/static/image/avatars/avatar_{{view_user.id}}.{{view_user.avatar_format}}">
+        <div class="user-avatar">
+            {% if view_user.has_avatar %}
+            <img src="/static/image/avatars/avatar_{{view_user.id}}.{{view_user.avatar_format}}">
+            {% else %}
+            S
+            {% endif %}
         </div>
         <div class="user-details">
             <div class="user-name">{{view_user.nickname}}</div>
@@ -15,16 +20,16 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="menu-other">
-            <a href="#" class="other-function" id="other-function-button">...</a>
-            <div class="function-type-dropdown" id="function-type-dropdown">
+        <div class="dropdown-hover-menu">
+            <a href="#" class="dropdown-hover-button" id="dropdown-hover-button">...</a>
+            <div class="dropdown-hover" id="dropdown-hover">
                 {% if current_user.is_authenticated %}
-                <a href="/create_complaint?user_id={{view_user.id}}&root=profile" class="dropdown-item">Жалоба</a>
+                <a href="/create_complaint?user_id={{view_user.id}}&root=profile" class="dropdown-hover-item">Жалоба</a>
                 {% if current_user.is_permitted('ban_users') and not view_user.has_ban %}
-                <a href="/ban/{{view_user.id}}" class="dropdown-item">Заблокировать</a>
+                <a href="/ban/{{view_user.id}}" class="dropdown-hover-item">Заблокировать</a>
                 {% endif %}
-                {%  if current_user.is_permitted('unban_users') and view_user.has_ban %}
-                <a href="/unban/{{view_user.id}}" class="dropdown-item">Разблокировать</a>
+                {% if current_user.is_permitted('unban_users') and view_user.has_ban %}
+                <a href="/unban/{{view_user.id}}" class="dropdown-hover-item">Разблокировать</a>
                 {% endif %}
                 {% endif %}
             </div>
@@ -46,9 +51,9 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    const menu = document.querySelector('.menu-other');
-    const createContentButton = document.getElementById('other-function-button');
-    const contentTypeDropdown = document.getElementById('function-type-dropdown');
+    const menu = document.querySelector('.dropdown-hover-menu');
+    const createContentButton = document.getElementById('dropdown-hover-button');
+    const contentTypeDropdown = document.getElementById('dropdown-hover');
     function setDropdownWidth() {
         const buttonWidth = createContentButton.offsetWidth;
         contentTypeDropdown.style.width = buttonWidth + 'px';

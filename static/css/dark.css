@@ -18,26 +18,32 @@ body {
   font-family: sans-serif;
 }
 
-.dropdown-button {
+/* dropdown click  */
+.dropdown-click-button {
     color: #959faa;
 }
 
-.dropdown-button:hover {
+.dropdown-click-button:hover {
     color: #a9b1c2
 }
 
-.dropdown-content {
+.dropdown-click-content {
     background-color: #383d48;
 }
 
-.dropdown-content a {
+.dropdown-click-content a {
     color: #959fb4;
 }
 
-.dropdown-content a:hover {
+.dropdown-click-content a:hover {
     background-color: #424751;
 }
 
+/*  dropdown hover  */
+
+
+
+/*       */
 
 .back-button:hover {
     background-color: #345b7a;
@@ -441,20 +447,20 @@ item-last-post {
     background-color: #2c3e50;
 }
 
-.other-function {
+.dropdown-hover-button {
     background-color: #313742;
     border: 2px solid #505662;
 }
 
-.function-type-dropdown {
+.dropdown-hover {
     background-color: #2a475e;
 }
 
-.dropdown-item {
+.dropdown-hover-item {
     color: #fff;
 }
 
-.dropdown-item:hover {
+.dropdown-hover-item:hover {
     background-color: #34495e;
 }
 

@@ -50,11 +50,11 @@
     </div>
     <div>
         {% if current_user.is_authenticated %}
-        <div class="dropdown">
-            <a href="#" class="dropdown-button" onclick="toggleDropdown(event)">
+        <div class="dropdown-click">
+            <a href="#" class="dropdown-click-button" onclick="toggleDropdown(event)">
                 {{ current_user.nickname }}
             </a>
-            <div id="myDropdown" class="dropdown-content">
+            <div id="myDropdown" class="dropdown-click-content">
                 <a href="/profile/{{ current_user.id }}/">Профиль</a>
                 <a href="/logout">Выйти</a>
             </div>
@@ -80,11 +80,11 @@
 <script>
     function toggleDropdown(event) {
         event.preventDefault();
-        document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("myDropdown").classList.toggle("dropdown-click-show");
     }
     window.onclick = function(event) {
-        if (!event.target.matches('.dropdown-button')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
+        if (!event.target.matches('.dropdown-click-button')) {
+            var dropdowns = document.getElementsByClassName("dropdown-click-content");
             var i;
             for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];

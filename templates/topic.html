@@ -7,8 +7,7 @@
 <div class="topic">
     <div class="topic-header">
         <h1 class="topic-title">{{topic.title}}</h1>
-        <a href="{{back_path}}"
-           class="back-button">
+        <a href="{{back_path}}" class="back-button">
             <span class="back-arrow">&lt;</span> Назад
         </a>
     </div>
@@ -17,7 +16,7 @@
         <div class="pagination">
             <a href="#">&laquo;</a>
             <a class="active" href="#">1</a>
-            <a href="#">2</a>я
+            <a href="#">2</a>
             <a href="#">3</a>
             <a href="#">...</a>
             <a href="#">5</a>
@@ -40,38 +39,77 @@
         <article class="post" id="post-{{post.id}}">
             <div class="post-user-info">
                 <div class="post-user-avatar">
-                    <img src="/static/image/avatars/avatar.webp" alt="User Avatar">
+                    {% if post.author.has_avatar %}
+                    <img src="/static/image/avatars/avatar_{{post.author.id}}.{{post.author.avatar_format}}">
+                    {% else %}
+                    S
+                    {% endif %}
                 </div>
                 <div class="post-user-info-other">
-                    {{ post.author.nickname }}
+                    <!--                    <a>{{ post.author.nickname }}</a>-->
+                    <div class="menu-ot">
+                        <a href="#" class="other-function" id="other-function-button">...</a>
+                        <div class="function-type-dropdown" id="function-type-dropdown">
+                            {% if current_user.is_authenticated %}
+                            <a href="/create_complaint?user_id={{view_user.id}}&root=profile" class="dropdown-item">Жалоба</a>
+                            {% if current_user.is_permitted('ban_users') and not view_user.has_ban %}
+                            <a href="/ban/{{view_user.id}}" class="dropdown-item">Заблокировать</a>
+                            {% endif %}
+                            {% if current_user.is_permitted('unban_users') and view_user.has_ban %}
+                            <a href="/unban/{{view_user.id}}" class="dropdown-item">Разблокировать</a>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="post-content-info">
-                <div class="post-content-header">
-                    <span>{{post.created_data.strftime("%d %b %Y")}}</span>
-                    <a href="#post-{{post.id}}" class="post-number">#{{loop.index}}</a>
+                <div class="post-content-info">
+                    <div class="post-content-header">
+                        <span>{{post.created_data.strftime("%d %b %Y")}}</span>
+                        <a href="#post-{{post.id}}" class="post-number">#{{loop.index}}</a>
+                    </div>
+                    <div class="post-content-data">
+                        {{ post.content }}
+                    </div>
+                    <div class="post-content-footer">
+                        {% if post.modified_data %}
+                        <p>Последнее редактирование: {{post.modified_data.strftime("%d %b %Y")}}</p>
+                        {% endif%}
+                        {% if current_user.is_authenticated %}
+                        {% if (post.author_id == current_user.id and current_user.is_permitted('edit_own_post')) or
+                        current_user.is_permitted('edit_any_post') %}
+                        <a class="function-button" href="/posts/{{post.id}}/edit">Редактировать</a>
+                        {% endif %}
+                        {% if (post.author_id == current_user.id and current_user.is_permitted('delete_own_post')) or
+                        current_user.is_permitted('delete_any_post') %}
+                        <a class="function-button" href="/posts/{{post.id}}/delete">Удалить</a>
+                        {% endif %}
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="post-content-data">
-                    {{ post.content }}
-                </div>
-                <div class="post-content-footer">
-                    {% if post.modified_data %}
-                    <p>Последнее редактирование: {{post.modified_data.strftime("%d %b %Y")}}</p>
-                    {% endif%}
-                    {% if current_user.is_authenticated %}
-                    {% if (post.author_id == current_user.id and current_user.is_permitted('edit_own_post')) or
-                    current_user.is_permitted('edit_any_post') %}
-                    <a class="function-button" href="/posts/{{post.id}}/edit">Редактировать</a>
-                    {% endif %}
-                    {% if (post.author_id == current_user.id and current_user.is_permitted('delete_own_post')) or
-                    current_user.is_permitted('delete_any_post') %}
-                    <a class="function-button" href="/posts/{{post.id}}/delete">Удалить</a>
-                    {% endif %}
-                    {% endif %}
-                </div>
-            </div>
         </article>
         {% endfor %}
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const menu = document.querySelector('.menu-other');
+    const createContentButton = document.getElementById('other-function-button');
+    const contentTypeDropdown = document.getElementById('function-type-dropdown');
+    function setDropdownWidth() {
+        const buttonWidth = createContentButton.offsetWidth;
+        contentTypeDropdown.style.width = buttonWidth + 'px';
+    }
+    setDropdownWidth();
+    window.addEventListener('resize', setDropdownWidth);
+    menu.addEventListener('mouseenter', function() {
+        contentTypeDropdown.classList.add('show');
+        createContentButton.setAttribute('aria-expanded', 'true');
+    });
+    menu.addEventListener('mouseleave', function() {
+        contentTypeDropdown.classList.remove('show');
+        createContentButton.setAttribute('aria-expanded', 'false');
+    });
+});
+</script>
 {% endblock %}

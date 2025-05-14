@@ -62,14 +62,14 @@ body {
 }
 
 
-/*  for droplist profile auth */
+/*  dropdown click     // for droplist profile auth */
 
-.dropdown {
+.dropdown-click {
     position: relative;
     display: inline-block;
 }
 
-.dropdown-button {
+.dropdown-click-button {
     background-color: transparent;
     padding: 10px 16px;
     border: none;
@@ -79,7 +79,7 @@ body {
 }
 
 
-.dropdown-content {
+.dropdown-click-content {
     display: none;
     position: absolute;
     min-width: 160px;
@@ -88,13 +88,13 @@ body {
     right: 0;
 }
 
-.dropdown-content a {
+.dropdown-click-content a {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.show {
+.dropdown-click-show {
     display: block;
 }
 
