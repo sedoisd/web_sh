@@ -62,7 +62,7 @@ body {
 }
 
 
-/*  dropdown click     // for droplist profile auth */
+/*  dropdown click  */
 
 .dropdown-click {
     position: relative;
@@ -96,6 +96,55 @@ body {
 
 .dropdown-click-show {
     display: block;
+}
+
+
+
+/*  dropdown click  */
+
+.dropdown-hover-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-hover-button {
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+}
+
+.dropdown-hover {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s ease 0.3s;
+    width: 100%;
+    min-width: fit-content;
+}
+
+.dropdown-hover.show {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.dropdown-hover-item {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
