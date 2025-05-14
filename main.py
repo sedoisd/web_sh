@@ -84,7 +84,7 @@ def forum(forum_id):
     if forum.parent_type == ForumParentType.group:
         back_path = '/'
     elif forum.parent_type == ForumParentType.category:
-        back_path = f'/categories/{topic.parent_id}/'
+        back_path = f'/categories/{forum.parent_id}/'
     return render_template('forum.html', forum=forum, topics=topics, back_path=back_path)
 
 
