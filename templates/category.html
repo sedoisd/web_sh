@@ -36,11 +36,8 @@
 
             </div>
             <div class="item-stats">
-                Темы x <br> Сообщения x
             </div>
             <div class="item-last-post">
-                <img src="" alt="User Avatar">
-                <p>Софт RakSAMP Lite <br> Вчера в 12:45 • Zooryby...</p>
             </div>
         </div>
         {% endfor %}
@@ -49,11 +46,9 @@
             <i><img class="icon-object-image" src="/static/image/icon_object/link.webp"></i>
             <div class="item-info">
                 <!--                <div class="item-tags">-->
-                <!--                    <span class="tag">Гайд</span>-->
-                <!--                    <span class="tag">Совет</span>-->
                 <!--                </div>-->
                 <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
-<!--                <div class="item-author">{{topic.author_id}}</div>-->
+                <div class="item-author">{{topic.author.nickname}}</div>
             </div>
         </div>
         {% endfor %}

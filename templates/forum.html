@@ -5,7 +5,7 @@
 
 <div class="forum">
     <h1 class="forum-title">вака</h1>
-    <a href="/{{'categories' if forum.parent_type.value == 'category' else topic.parent_type.value + 's'}}/{{forum.parent_id}}/"
+    <a href="{{back_path}}"
        class="back-button">
         <span class="back-arrow">&lt;</span> Назад
     </a>
@@ -38,15 +38,11 @@
             </div>
             <div class="item-info">
                 <!--                <div class="item-tags">-->
-                <!--                    <span class="tag">Гайд</span>-->
-                <!--                    <span class="tag">Совет</span>-->
                 <!--                </div>-->
                 <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
-                <div class="item-author">{{topic.author_id}}</div>
+                <div class="item-author">{{topic.author.nickname}}</div>
+<!--                <div class="item-dater">{{topic.created_date}}</div>-->
                 <div class="item-stats">
-                    <span>20<img src="" width="15px"></span>
-                    <span>10K<img src="" width="15px"></span>
-                    <span>Орк ответил 29 Окт 2024</span>
                 </div>
             </div>
         </div>

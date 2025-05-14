@@ -81,7 +81,11 @@ def forum(forum_id):
     forum = session.query(Forum).filter(Forum.id == forum_id).first()
     topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
                                          Topic.parent_id == forum.id)
-    return render_template('forum.html', forum=forum, topics=topics)
+    if forum.parent_type == ForumParentType.group:
+        back_path = '/'
+    elif forum.parent_type == ForumParentType.category:
+        back_path = f'/categories/{topic.parent_id}/'
+    return render_template('forum.html', forum=forum, topics=topics, back_path=back_path)
 
 
 @app.route('/topics/<int:topic_id>/')
