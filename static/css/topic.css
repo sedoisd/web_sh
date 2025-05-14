@@ -67,6 +67,8 @@
 .post-user-info-other {
     font-weight: bold;
     margin-bottom: 5px;
+    position: relative;
+    display: inline-block;
 }
 
 .post-content-info {
