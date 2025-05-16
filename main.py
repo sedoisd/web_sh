@@ -142,6 +142,36 @@ def create_objet_content_in_category(category_id):
         return abort(404)
 
 
+@app.route('/categories/<int:category_id>/delete')  # delete forum
+@login_required
+def delete_category(category_id):
+    session = db_session.create_session()
+    category = session.query(Category).filter(Category.id == category_id).first()
+    if not category:
+        abort(404)
+    forums = session.query(Forum).filter(Forum.parent_type == ForumParentType.category,
+                                         Forum.parent_id == category_id).all()
+    for forum in forums:
+        topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
+                                             Topic.parent_id == forum.id).all()
+        for topic in topics:
+            posts = session.query(Post).filter(Post.topic_id == topic.id).all()
+            for post in posts:
+                session.delete(post)
+            session.delete(topic)
+        session.delete(forum)
+    topics_root_in_category = session.query(Topic).filter(Topic.parent_type == TopicParentType.category,
+                                                          Topic.parent_id == category_id).all()
+    for topic_root_in_category in topics_root_in_category:
+        posts = session.query(Post).filter(Post.topic_id == topic_root_in_category.id).all()
+        for post in posts:
+            session.delete(post)
+        session.delete(topic_root_in_category)
+    session.delete(category)
+    session.commit()
+    return redirect(f'/#group-{category.parent_id}')
+
+
 #   --------------------------------------------------------------------------------------------
 # function forums  -----------------------------------------------------------------------------
 @app.route('/forums/<int:forum_id>/create_topic', methods=['GET', 'POST'])  # add topic
@@ -165,8 +195,21 @@ def create_topic(forum_id):
 @login_required
 def delete_forum(forum_id):
     session = db_session.create_session()
-    forum = session.query(Forum).filter(Forum.id)
-    return
+    forum = session.query(Forum).filter(Forum.id == forum_id).first()
+    if not forum:
+        abort(404)
+    topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
+                                         Topic.parent_id == forum.id).all()
+    for topic in topics:
+        posts = session.query(Post).filter(Post.topic_id == topic.id).all()
+        for post in posts:
+            session.delete(post)
+        session.delete(topic)
+    session.delete(forum)
+    session.commit()
+    if forum.parent_type == 'category':
+        return redirect(f'/categories/{forum.parent_id}/')
+    return redirect(f'/#group-{forum.parent_id}')
 
 
 #   --------------------------------------------------------------------------------------------

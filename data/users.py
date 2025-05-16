@@ -25,7 +25,7 @@ class User(SqlAlchemyBase, UserMixin):
     roles = sqlalchemy.orm.relationship("Role",
                                   secondary="role_to_user",
                                   backref="user")
-    posts = sqlalchemy.orm.relationship('Post')
+    posts = sqlalchemy.orm.relationship('Post', backref='author')
 
 
     def set_password(self, password):

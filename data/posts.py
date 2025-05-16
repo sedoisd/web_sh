@@ -16,5 +16,5 @@ class Post(SqlAlchemyBase):
     author_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"), nullable=False)
     topic_id =  sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("topics.id"), nullable=False)
 
-    author = orm.relationship('User')
+    # author = orm.relationship('User')
     topic = orm.relationship('Topic')
