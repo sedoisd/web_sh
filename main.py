@@ -104,7 +104,7 @@ def topic(topic_id):
 
 #   --------------------------------------------------------------------------------------------
 # function users  -----------------------------------------------------------------------------
-@app.route('/ban/<int:user_id')
+@app.route('/ban/<int:user_id>/')
 @login_required
 def ban_by_user_id(user_id):
 
@@ -112,7 +112,7 @@ def ban_by_user_id(user_id):
     return redirect('/')
 
 
-@app.route('/unban/<int:user_id')
+@app.route('/unban/<int:user_id>/')
 @login_required
 def unban_by_user_id(user_id):
 
