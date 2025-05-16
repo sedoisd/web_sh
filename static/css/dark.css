@@ -1,5 +1,7 @@
 /* theme_dark.css */
 
+
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* style.css */
 .header {
   background-color: #313742;
@@ -18,6 +20,7 @@ body {
   font-family: sans-serif;
 }
 
+/*     ---------------------------------------   */
 /* dropdown click  */
 .dropdown-click-button {
     color: #959faa;
@@ -39,6 +42,7 @@ body {
     background-color: #424751;
 }
 
+/*     ---------------------------------------   */
 /*  dropdown hover  */
 .dropdown-hover-button {
     background-color: #313742;
@@ -57,9 +61,8 @@ body {
     background-color: #34495e;
 }
 
-
-
-/*       */
+/*     ---------------------------------------   */
+/*   button-function    */
 .back-button:hover {
     background-color: #345b7a;
 }
@@ -70,6 +73,43 @@ body {
 }
 
 
+#delete-button {
+    color: white;
+    background-color: #dc3545;
+}
+
+#delete-button:hover {
+    background-color: #c82333;
+}
+
+#create-group-button {
+    color: white;
+    background-color: #558BBD;
+}
+
+#create-group-button:hover {
+    background-color: #3b596c;
+}
+
+.create-content-button {
+    color: white;
+    background-color: #558BBD;
+}
+
+.create-content-button:hover {
+    background-color: #3b596c;
+}
+
+#edit-button {
+    color: white;
+    background-color: #375c94;
+}
+
+#edit-button:hover {
+    background-color: #2b4975;
+}
+
+/*     ---------------------------------------   */
 /* management page */
 .pagination {
     background-color: #313742
@@ -100,6 +140,7 @@ body {
 }
 
 
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* login.css */
 .login-container h1 {
     color: #c0c9ce
@@ -122,6 +163,7 @@ body {
 }
 
 
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* register.css */
 .registration-container h1 {
     color: #c0c9ce
@@ -151,6 +193,7 @@ body {
 
 
 
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* index.css  */
 .group-header {
     background-color: #3b424f
@@ -180,6 +223,7 @@ body {
 
 
 
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* category.css */
 .category-title {
     color: #fff;
@@ -230,6 +274,8 @@ item-last-post {
 }
 
 
+
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* forums.css */
 .function-objects .create-topic {
     background-color: #558BBD;
@@ -272,6 +318,7 @@ item-last-post {
 }
 
 
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* topic.css */
 .function-objects .reply {
     color: white;
@@ -337,6 +384,9 @@ item-last-post {
     color: #959faa
 }
 
+
+
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* reply.css  */
 .reply-form {
     background-color: #313742;
@@ -386,6 +436,9 @@ item-last-post {
     background-color: #c82333;
 }
 
+
+
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* create_topic.css */
 .create-form {
     background-color: #313742;
@@ -421,6 +474,9 @@ item-last-post {
     background-color: #8fbcbb;
 }
 
+
+
+/*     ---------------------------------------------------------------------------------------------------------     */
 /* profile.css */
 .profile-block {
     background-color: #313742;
@@ -464,4 +520,5 @@ item-last-post {
 
 
 
+/*     ---------------------------------------------------------------------------------------------------------     */
 /*          */

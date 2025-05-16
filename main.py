@@ -55,6 +55,7 @@ def index():
                            forums_by_groups=forums_by_groups, topics_by_groups=topics_by_groups)
 
 
+#   --------------------------------------------------------------------------------------------
 # view  -----------------------------------------------------------------------------
 @app.route('/profile/<int:user_id>/')
 def profile(user_id):
@@ -103,11 +104,36 @@ def topic(topic_id):
 
 
 #   --------------------------------------------------------------------------------------------
+# function groups  -----------------------------------------------------------------------------
+@app.route('/create_group')
+@login_required
+def create_group():
+    return render_template('create_object_content.html', )
+
+
+@app.route('/groups/<int:group_id>/delete')
+@login_required
+def delete_group(group_id):
+    return
+
+
+@app.route('/groups/<int:group_id>/edit')
+@login_required
+def edit_group(group_id):
+    return
+
+
+@app.route('/groups/<int:group_id>/create_object_content')
+@login_required
+def create_object_content_in_group(group_id):
+    return
+
+
+#   --------------------------------------------------------------------------------------------
 # function users  -----------------------------------------------------------------------------
 @app.route('/ban/<int:user_id>/')
 @login_required
 def ban_by_user_id(user_id):
-
     return render_template('')
     return redirect('/')
 
@@ -115,7 +141,6 @@ def ban_by_user_id(user_id):
 @app.route('/unban/<int:user_id>/')
 @login_required
 def unban_by_user_id(user_id):
-
     return render_template('')
     return redirect('/')
 

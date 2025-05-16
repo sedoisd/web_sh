@@ -62,8 +62,8 @@ body {
 }
 
 
-/*  dropdown click  */
 
+/*  dropdown click  */
 .dropdown-click {
     position: relative;
     display: inline-block;
@@ -101,7 +101,6 @@ body {
 
 
 /*  dropdown hover  */
-
 .dropdown-hover-menu {
     position: relative;
     display: inline-block;
@@ -181,8 +180,8 @@ body {
 }
 
 
-/* general  */
 
+/* general  */
 .icon-object-image {
     max-width:25px;
     max-height:25px;
@@ -252,4 +251,58 @@ body {
     text-decoration: none;
     transition: background-color 0.2s ease;
     white-space: nowrap;
+}
+
+
+/*  button function   */
+
+#delete-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+#delete-button i {
+    margin-right: 5px;
+}
+
+#edit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+#edit-button i {
+    margin-right: 5px;
+}
+
+#create-group-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+#create-group-button i {
+    margin-right: 5px;
 }

@@ -2,14 +2,22 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/index.css')}}">
-
+<a href="/create_group" class="create-object-content" style="margin-bottom: 15px;"  id="create-group-button">Создать группу</a>
 {% for group in groups %}
 <div class="group" id="group-{{group.id}}">
     <div class="group-header" onclick="toggleCategory(this)">
         <a class="group-sil" href="#group-{{group.id}}">{{group.title}}</a>
-        <a href="/DASD" class="create-object-content" >Удалить группу</a>
-        <a href="/DASD" class="create-object-content" >Редактировать группу</a>
-        <a href="/DASD" class="create-object-content" >Создать обьект контента</a>
+        <a href="/groups/{{group.id}}/delete" class="create-object-content" id="delete-button">Удалить группу</a>
+        <a href="/groups/{{group.id}}/edit" class="create-object-content" id="edit-button">Редактировать группу</a>
+        <div class="menu">
+            <a class="create-content-button" id="create-content-button">Создать объект контента</a>
+            <div class="content-type-dropdown" id="content-type-dropdown">
+                <a href="/categories//create_object_content?content_type=category" class="dropdown-item">Категорию</a>
+                <a href="/categories//create_object_content?content_type=forum" class="dropdown-item">Форум</a>
+                <a href="/categories//create_object_content?content_type=topic" class="dropdown-item">Топик</a>
+            </div>
+        </div>
+<!--        <a href="/groups/{{group.id}}/create_object_content" class="create-object-content-button" id="create-object-content-button">Создать обьект контента</a>-->
 
         <span class="arrow rotated">&#x2303;</span>
     </div>
@@ -75,7 +83,42 @@
     }
 
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menus = document.querySelectorAll('.menu');
+    menus.forEach(menu => {
+        const createContentButton = menu.querySelector('.create-content-button');
+        const contentTypeDropdown = menu.querySelector('#content-type-dropdown');
+        function setDropdownWidth() {
+            if (createContentButton && contentTypeDropdown) {
+                const buttonWidth = createContentButton.offsetWidth;
+                contentTypeDropdown.style.width = buttonWidth + 'px';
+            }
+        }
+        setDropdownWidth();
+        window.addEventListener('resize', setDropdownWidth);
+        menu.addEventListener('mouseenter', function() {
+            setDropdownWidth();
+            if (contentTypeDropdown) {
+                contentTypeDropdown.classList.add('show');
+            }
+            if (createContentButton) {
+                createContentButton.setAttribute('aria-expanded', 'true');
+            }
 
+        });
+
+        menu.addEventListener('mouseleave', function() {
+            if (contentTypeDropdown) {
+                contentTypeDropdown.classList.remove('show');
+            }
+            if (createContentButton) {
+                createContentButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+    });
+});
+</script>
 <footer>
     <div class="container">
         <p>&copy; 2024 Ваш форум. Все права защищены.</p>
