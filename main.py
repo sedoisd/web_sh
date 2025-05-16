@@ -103,6 +103,24 @@ def topic(topic_id):
 
 
 #   --------------------------------------------------------------------------------------------
+# function users  -----------------------------------------------------------------------------
+@app.route('/ban/<int:user_id')
+@login_required
+def ban_by_user_id(user_id):
+
+    return render_template('')
+    return redirect('/')
+
+
+@app.route('/unban/<int:user_id')
+@login_required
+def unban_by_user_id(user_id):
+
+    return render_template('')
+    return redirect('/')
+
+
+#   --------------------------------------------------------------------------------------------
 # function categories  -----------------------------------------------------------------------------
 @app.route('/categories/<int:category_id>/create_object_content',
            methods=['GET', 'POST'])  # add topic/forum in category

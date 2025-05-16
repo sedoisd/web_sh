@@ -7,7 +7,10 @@
 <div class="group" id="group-{{group.id}}">
     <div class="group-header" onclick="toggleCategory(this)">
         <a class="group-sil" href="#group-{{group.id}}">{{group.title}}</a>
-        <a href="/DASD" class="create-object-content" id="create-content-button">Редактировать группу</a>
+        <a href="/DASD" class="create-object-content" >Удалить группу</a>
+        <a href="/DASD" class="create-object-content" >Редактировать группу</a>
+        <a href="/DASD" class="create-object-content" >Создать обьект контента</a>
+
         <span class="arrow rotated">&#x2303;</span>
     </div>
     <div class="group-items">
@@ -53,7 +56,7 @@
                 <!--                    <span class="tag">Совет</span>-->
                 <!--                </div>-->
                 <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
-<!--                <div class="item-author">{{topic.author_id}}</div>-->
+                <!--                <div class="item-author">{{topic.author_id}}</div>-->
             </div>
         </div>
         {% endif %}
