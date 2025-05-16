@@ -5,20 +5,21 @@
 
 <div class="forum">
     <h1 class="forum-title">вака</h1>
-    <a href="{{back_path}}"
-       class="back-button">
-        <span class="back-arrow">&lt;</span> Назад
-    </a>
+
     <div class="management">
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a class="active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">...</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
-        </div>
+        <a href="{{back_path}}"
+           class="back-button">
+            <span class="back-arrow">&lt;</span> Назад
+        </a>
+<!--        <div class="pagination">-->
+<!--                        <a href="#">&laquo;</a>-->
+<!--                        <a class="active" href="#">1</a>-->
+<!--                        <a href="#">2</a>-->
+<!--                        <a href="#">3</a>-->
+<!--                        <a href="#">...</a>-->
+<!--                        <a href="#">5</a>-->
+<!--                        <a href="#">&raquo;</a>-->
+<!--        </div>-->
         <div class="function-objects">
             {% if current_user.is_authenticated %}
             {% if current_user.is_permitted('delete_forum') %}
@@ -41,7 +42,7 @@
                 <!--                </div>-->
                 <a href="/topics/{{topic.id}}/" class="item-title">{{topic.title}}</a>
                 <div class="item-author">{{topic.author.nickname}}</div>
-<!--                <div class="item-dater">{{topic.created_date}}</div>-->
+                <!--                <div class="item-dater">{{topic.created_date}}</div>-->
                 <div class="item-stats">
                 </div>
             </div>

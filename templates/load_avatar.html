@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/load_avatar.css')}}">
+<div class="load-container">
+    <h1>Загрузить аватар</h1>
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <label> {{ form.image.label }}</label>
+        {{ form.image(class="form-control") }}
+        {% if form.image.errors %}
+        <ul class="errors">
+            {% for error in form.image.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <button type="submit-button">Загрузить</button>
+    </form>
+</div>
+{% endblock content %}

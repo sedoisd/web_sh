@@ -13,15 +13,15 @@
     </div>
     <!--    -->
     <div class="management">
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a class="active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">...</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
-        </div>
+<!--        <div class="pagination">-->
+<!--            <a href="#">&laquo;</a>-->
+<!--            <a class="active" href="#">1</a>-->
+<!--            <a href="#">2</a>-->
+<!--            <a href="#">3</a>-->
+<!--            <a href="#">...</a>-->
+<!--            <a href="#">5</a>-->
+<!--            <a href="#">&raquo;</a>-->
+<!--        </div>-->
         <div class="function-objects">
             {% if current_user.is_authenticated %}
             {% if (topic.author_id == current_user.id and current_user.is_permitted('delete_own_topic')) or

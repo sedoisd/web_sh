@@ -521,4 +521,23 @@ item-last-post {
 
 
 /*     ---------------------------------------------------------------------------------------------------------     */
-/*          */
+/*   laod_avatar       */
+.load-container h1 {
+    color: #c0c9ce
+}
+
+.load-container {
+    background: #313742
+    }
+
+.load-container .form-group input[class="form-control"] {
+    background-color: #383d48;
+    color: #c0c9ce
+}
+.load-container .submit-button {
+    background-color: #558BBD;
+    color: white
+}
+.load-container .form-group label {
+    color: #ddd
+}

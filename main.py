@@ -1,10 +1,12 @@
 import datetime
+from io import BytesIO
 
 import flask
 # import locale
-
+from PIL import Image
 from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.my_enum import ForumParentType, TopicParentType
@@ -18,7 +20,7 @@ from data.permissions import Permission
 from data.roles import Role
 
 from forms.object_content import ObjectContent
-from forms.user import RegisterForm, LoginForm
+from forms.user import RegisterForm, LoginForm, EditForm, LoadImageAvatarForm
 from forms.topic import TopicReplyForm, TopicCreateForm
 from sqlalchemy import or_
 
@@ -101,6 +103,45 @@ def topic(topic_id):
     elif topic.parent_type == TopicParentType.forum:
         back_path = f'/forums/{topic.parent_id}/'
     return render_template('topic.html', topic=topic, posts=posts, back_path=back_path)
+
+
+#   --------------------------------------------------------------------------------------------
+# function users  -----------------------------------------------------------------------------
+
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form = EditForm()
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        user = session.query(User).filter(User.id == current_user.id).first()
+        user.nickname = form.name.data
+        user.email = form.email.data
+        user.about = form.about.data
+        session.commit()
+        return redirect(f'/profile/{current_user.id}/')
+    form.name.data = current_user.nickname
+    form.email.data = current_user.email
+    form.about.data = current_user.about
+    return render_template('edit_profile.html', form=form)
+
+
+@app.route('/edit_avatar', methods=['GET', 'POST'])
+@login_required
+def edit_avatar():
+    form = LoadImageAvatarForm()
+    if form.validate_on_submit():
+        image = form.image.data
+        data = image.read()
+        im = Image.open(BytesIO(data))
+        im.save(f'static/image/avatars/avatar_{current_user.id}.{im.format}')
+        session = db_session.create_session()
+        user = session.query(User).filter(User.id == current_user.id).first()
+        user.has_avatar = True
+        user.avatar_format = im.format
+        session.commit()
+        return redirect(f'/profile/{current_user.id}/')
+    return render_template('load_avatar.html', form=form)
 
 
 #   --------------------------------------------------------------------------------------------

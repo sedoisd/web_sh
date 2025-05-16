@@ -20,20 +20,25 @@
                 {% endfor %}
             </div>
         </div>
+        {% if current_user.id ==  view_user.id %}
         <div class="dropdown-hover-menu">
             <a href="#" class="dropdown-hover-button" id="dropdown-hover-button">...</a>
             <div class="dropdown-hover" id="dropdown-hover">
-                {% if current_user.is_authenticated %}
-                <a href="/create_complaint?user_id={{view_user.id}}&root=profile" class="dropdown-hover-item">Жалоба</a>
-                {% if current_user.is_permitted('ban_users') and not view_user.has_ban %}
-                <a href="/ban/{{view_user.id}}" class="dropdown-hover-item">Заблокировать</a>
-                {% endif %}
-                {% if current_user.is_permitted('unban_users') and view_user.has_ban %}
-                <a href="/unban/{{view_user.id}}" class="dropdown-hover-item">Разблокировать</a>
-                {% endif %}
-                {% endif %}
+<!--                {% if current_user.id ==  view_user.id %}-->
+                <a href="/edit_profile" class="dropdown-hover-item">Редактировать профиль</a>
+                <a href="/edit_avatar" class="dropdown-hover-item">Изменить аватар</a>
+<!--                {% else %}-->
+<!--                <a href="/create_complaint?user_id={{view_user.id}}&root=profile" class="dropdown-hover-item">Жалоба</a>-->
+<!--                {% if current_user.is_permitted('ban_users') and not view_user.has_ban %}-->
+<!--                <a href="/ban/{{view_user.id}}" class="dropdown-hover-item">Заблокировать</a>-->
+<!--                {% endif %}-->
+<!--                {% if current_user.is_permitted('unban_users') and view_user.has_ban %}-->
+<!--                <a href="/unban/{{view_user.id}}" class="dropdown-hover-item">Разблокировать</a>-->
+<!--                {% endif %}-->
+<!--                {% endif %}-->
             </div>
         </div>
+        {% endif %}
     </div>
 
     <div class="user-stats">
@@ -45,6 +50,9 @@
             <div class="stat-label">Дата регистрации</div>
             <div class="stat-value">{{view_user.created_date.strftime("%d %b %Y")}}</div>
         </div>
+    </div>
+    <div class="user-other">
+        О себе: {{view_user.about}}
     </div>
 </div>
 
