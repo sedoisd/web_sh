@@ -6,7 +6,6 @@ import flask
 from PIL import Image
 from flask import Flask, render_template, redirect, request, abort
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
-from werkzeug.utils import secure_filename
 
 from data import db_session
 from data.my_enum import ForumParentType, TopicParentType
