@@ -105,28 +105,142 @@ def topic(topic_id):
 
 #   --------------------------------------------------------------------------------------------
 # function groups  -----------------------------------------------------------------------------
-@app.route('/create_group')
+@app.route('/create_group', methods=['GET', 'POST'])
 @login_required
 def create_group():
-    return render_template('create_object_content.html', )
+    form = ObjectContent()
+    back_path = '/'
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        group = Group(title=form.object_name.data, author_id=current_user.id)
+        session.add(group)
+        session.commit()
+        return redirect('/')
+    return render_template('create_object_content.html', form=form,
+                           is_create_topic=False, text_name='группы',
+                           back_path=back_path, type_name='группа', text_mode_create='группу')
 
 
 @app.route('/groups/<int:group_id>/delete')
 @login_required
 def delete_group(group_id):
-    return
+    session = db_session.create_session()
+    group = session.query(Group).filter(Group.id == group_id).first()
+    if not group:
+        abort(404)
+    if current_user.is_permitted('delete_group'):
+        # delete categories and content
+        categories = session.query(Category).filter(Category.parent_type == CategoryParentType.group,
+                                                    Category.parent_id == group_id).all()
+        for category_g in categories:
+
+            forums = session.query(Forum).filter(Forum.parent_type == ForumParentType.category,
+                                                 Forum.parent_id == category_g.id).all()
+            for forum_c in forums:
+                topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
+                                                     Topic.parent_id == forum_c.id).all()
+                for topic_f in topics:
+                    posts = session.query(Post).filter(Post.topic_id == topic_f.id).all()
+                    for post in posts:
+                        session.delete(post)
+                    session.delete(topic_f)
+                session.delete(forum_c)
+            topics_root_in_category = session.query(Topic).filter(Topic.parent_type == TopicParentType.category,
+                                                                  Topic.parent_id == category_g.id).all()
+            for topic_root_in_category in topics_root_in_category:
+                posts = session.query(Post).filter(Post.topic_id == topic_root_in_category.id).all()
+                for post in posts:
+                    session.delete(post)
+                session.delete(topic_root_in_category)
+            session.delete(category_g)
+        # delete forums and content
+        forums = session.query(Forum).filter(Forum.parent_type == ForumParentType.group,
+                                             Forum.parent_id == group_id).all()
+        for forum in forums:
+            topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.forum,
+                                                 Topic.parent_id == forum.id).all()
+            for topic in topics:
+                posts = session.query(Post).filter(Post.topic_id == topic.id).all()
+                for post in posts:
+                    session.delete(post)
+                session.delete(topic)
+            session.delete(forum)
+        # delete topic and content
+        topics = session.query(Topic).filter(Topic.parent_type == TopicParentType.group,
+                                             Topic.parent_id == group_id).all()
+        for topic in topics:
+            posts = session.query(Post).filter(Post.topic_id == topic.id).all()
+            for post in posts:
+                session.delete(post)
+            session.delete(topic)
+        session.delete(group)
+        session.commit()
+        return redirect('/')
 
 
-@app.route('/groups/<int:group_id>/edit')
+@app.route('/groups/<int:group_id>/edit', methods=['GET', 'POST'])
 @login_required
 def edit_group(group_id):
-    return
+    form = ObjectContent()
+    back_path = '/'
+    session = db_session.create_session()
+    group = session.query(Group).filter(Group.id == group_id).first()
+    if form.validate_on_submit():
+        group.title = form.object_name.data
+        session.commit()
+        return redirect('/')
+    form.object_name.data = group.title
+    return render_template('create_object_content.html', form=form,
+                           is_create_topic=False, text_name='группы',
+                           back_path=back_path, type_name='группа', text_mode_create='группу')
 
 
-@app.route('/groups/<int:group_id>/create_object_content')
+@app.route('/groups/<int:group_id>/create_object_content', methods=['GET', 'POST'])
 @login_required
 def create_object_content_in_group(group_id):
-    return
+    content_type = request.args.get('content_type')
+    form = ObjectContent()
+    if form.validate_on_submit():
+        session = db_session.create_session()
+        if content_type == 'topic':
+            if form.content.data:
+                topic = Topic(title=form.object_name.data, author_id=current_user.id,
+                              parent_type=TopicParentType.group, parent_id=group_id)
+                session.add(topic)
+                session.commit()
+                post = Post(content=form.content.data, author_id=current_user.id, topic_id=topic.id)
+                session.add(post)
+                session.commit()
+                return redirect(f'/topics/{topic.id}/')
+            else:
+                form.content.errors.append('Вы пропустили это поле.')
+        elif content_type == 'forum':
+            forum = Forum(title=form.object_name.data, author_id=current_user.id,
+                          parent_type=ForumParentType.group, parent_id=group_id)
+            session.add(forum)
+            session.commit()
+            return redirect(f'/forums/{forum.id}/')
+        elif content_type == 'category':
+            category = Category(title=form.object_name.data, author_id=current_user.id,
+                                parent_type=CategoryParentType.group, parent_id=group_id)
+            session.add(category)
+            session.commit()
+            return redirect(f'/categories/{category.id}/')
+    back_path = f'/#group-{group_id}'
+    if content_type == 'topic':
+        return render_template('create_object_content.html', form=form,
+                               text_name='темы', is_create_topic=True,
+                               back_path=back_path, type_name='тема', text_mode_create='тему')
+    elif content_type == 'forum':
+        return render_template('create_object_content.html', form=form,
+                               is_create_topic=False, text_name='форума',
+                               back_path=back_path, type_name='форум', text_mode_create='форум')
+    elif content_type == 'category':
+        return render_template('create_object_content.html', form=form,
+                               is_create_topic=False, text_name='категории',
+                               back_path=back_path, type_name='категория', text_mode_create='категорию')
+    else:
+        return abort(404)
 
 
 #   --------------------------------------------------------------------------------------------
@@ -176,11 +290,11 @@ def create_objet_content_in_category(category_id):
     if content_type == 'topic':
         return render_template('create_object_content.html', form=form,
                                text_name='темы', is_create_topic=True,
-                               back_path=f'/categories/{category_id}/', type_name='тема')
+                               back_path=f'/categories/{category_id}/', type_name='тема', text_mode_create='тему')
     elif content_type == 'forum':
         return render_template('create_object_content.html', form=form,
                                is_create_topic=False, text_name='форума',
-                               back_path=f'/categories/{category_id}/', type_name='форум')
+                               back_path=f'/categories/{category_id}/', type_name='форум', text_mode_create='форум')
     else:
         return abort(404)
 
